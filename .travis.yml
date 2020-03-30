@@ -18,6 +18,8 @@ notifications:
       kirbel74@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
-  env:
-    global:
-      - CODECOV_TOKEN="1695516b-ae96-4dfb-9f98-ffc18741de57"
+
+
+env:
+  global:
+    - CODECOV_TOKEN="a362e2c6-fb7f-496d-baba-1f6c5c542e12"
