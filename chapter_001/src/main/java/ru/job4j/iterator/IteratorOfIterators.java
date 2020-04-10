@@ -8,11 +8,11 @@ public class IteratorOfIterators {
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
 
-            Iterator<Integer> iterator = it.next();
+            Iterator<Integer> iterator;
 
             @Override
             public boolean hasNext() {
-                if (!iterator.hasNext() && it.hasNext()) {
+                if (iterator == null || !iterator.hasNext() && it.hasNext()) {
                     iterator = it.next();
                 }
                 return iterator.hasNext();
