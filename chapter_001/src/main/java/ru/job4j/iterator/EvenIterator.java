@@ -14,7 +14,7 @@ public class EvenIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return this.check() != -1;
+        return this.check();
     }
 
     @Override
@@ -23,14 +23,13 @@ public class EvenIterator implements Iterator {
             throw new NoSuchElementException();
         }
         return this.arr[this.index++];
-
     }
 
-    private int check() {
-        int result = -1;
+    private boolean check() {
+        boolean result = false;
         for (; this.index != this.arr.length; this.index++) {
             if (this.arr[this.index] % 2 == 0) {
-                result = this.arr[this.index];
+                result = true;
                 break;
             }
         }
