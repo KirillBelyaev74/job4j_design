@@ -12,7 +12,7 @@ public class IteratorOfIterators {
 
             @Override
             public boolean hasNext() {
-                if (iterator == null || !iterator.hasNext() && it.hasNext()) {
+                while (iterator == null || !iterator.hasNext() && it.hasNext()) {
                     iterator = it.next();
                 }
                 return iterator.hasNext();

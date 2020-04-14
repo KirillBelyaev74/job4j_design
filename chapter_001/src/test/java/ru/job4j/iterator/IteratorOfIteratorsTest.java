@@ -107,8 +107,6 @@ public class IteratorOfIteratorsTest {
         Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
         IteratorOfIterators IteratorOfIterators = new IteratorOfIterators();
         it = IteratorOfIterators.convert(its);
-        assertThat(it.hasNext(), is(false));
-        assertThat(it.hasNext(), is(false));
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));
