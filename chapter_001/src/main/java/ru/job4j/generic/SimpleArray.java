@@ -18,26 +18,37 @@ public class SimpleArray<T> implements Iterable {
         this.array[this.position++] = model;
     }
 
-    public void set(int index, T model) {
-        if (index >= this.array.length) {
+    public boolean set(int index, T model) {
+        boolean result = false;
+        if (index >= 0 && index <= this.position) {
+            this.array[index] = model;
+            result = true;
+        } else {
             throw new ArrayIndexOutOfBoundsException();
         }
-        this.array[index] = model;
+        return result;
     }
 
-    public void remove(int index) {
-        if (index >= this.array.length) {
+    public boolean remove(int index) {
+        boolean result = false;
+        if (index >= 0 && index <= this.position) {
+            System.arraycopy(this.array, index + 1, this.array, index, this.array.length - 1 - index);
+            this.position--;
+            result = true;
+        } else {
             throw new ArrayIndexOutOfBoundsException();
         }
-        System.arraycopy(this.array, index + 1, this.array, index, this.array.length - 1 - index);
-        this.position--;
+        return result;
     }
 
     public Object get(int index) {
-        if (index >= this.array.length) {
+        Object result = null;
+        if (index >= 0 && index <= this.position) {
+            result = this.array[index];
+        } else {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return this.array[index];
+        return result;
     }
 
     @Override
