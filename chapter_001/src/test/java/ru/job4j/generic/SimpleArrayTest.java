@@ -33,9 +33,9 @@ public class SimpleArrayTest {
 
     @Test
     public void whenDeleteTwoIndex() {
-        simpleArray.remove(2);
+        simpleArray.remove(1);
         assertThat(simpleArray.get(0), is(1));
-        assertThat(simpleArray.get(1), is(2));
+        assertThat(simpleArray.get(1), is(3));
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)

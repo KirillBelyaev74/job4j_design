@@ -12,7 +12,7 @@ public class SimpleArray<T> implements Iterable {
     }
 
     public void add(T model) {
-        if (this.position >= this.array.length) {
+        if (this.position > this.array.length) {
             throw new ArrayIndexOutOfBoundsException();
         }
         this.array[this.position++] = model;
@@ -20,7 +20,7 @@ public class SimpleArray<T> implements Iterable {
 
     public boolean set(int index, T model) {
         boolean result = false;
-        if (index >= 0 && index <= this.position) {
+        if (index >= 0 && index < this.position) {
             this.array[index] = model;
             result = true;
         } else {
@@ -31,8 +31,8 @@ public class SimpleArray<T> implements Iterable {
 
     public boolean remove(int index) {
         boolean result = false;
-        if (index >= 0 && index <= this.position) {
-            System.arraycopy(this.array, index + 1, this.array, index, this.array.length - 1 - index);
+        if (index >= 0 && index < this.position) {
+            System.arraycopy(this.array, index + 1, this.array, index, (this.position - 1) - index);
             this.position--;
             result = true;
         } else {
@@ -43,7 +43,7 @@ public class SimpleArray<T> implements Iterable {
 
     public Object get(int index) {
         Object result = null;
-        if (index >= 0 && index <= this.position) {
+        if (index >= 0 && index < this.position) {
             result = this.array[index];
         } else {
             throw new ArrayIndexOutOfBoundsException();
