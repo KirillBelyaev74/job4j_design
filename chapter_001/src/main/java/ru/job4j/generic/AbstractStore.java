@@ -1,6 +1,6 @@
 package ru.job4j.generic;
 
-public abstract class AbstractStore<T extends Base>  implements Store{
+public abstract class AbstractStore<T extends Base> implements Store {
 
     private SimpleArray<Base> base;
     private int size;
@@ -17,16 +17,15 @@ public abstract class AbstractStore<T extends Base>  implements Store{
 
     @Override
     public boolean replace(String id, Base model) {
-        int idInt = Integer.parseInt(id);
-        return (idInt >= 0 && idInt < this.size) && (this.base.set(idInt, model));
+        return this.base.set(this.findIndex(id), model);
     }
 
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        int idInt = Integer.parseInt(id);
-        if (idInt >= 0 && idInt < this.size) {
-            this.base.remove(idInt);
+        int index = this.findIndex(id);
+        if (index != -1) {
+            this.base.remove(index);
             this.size--;
             result = true;
         }
@@ -35,7 +34,18 @@ public abstract class AbstractStore<T extends Base>  implements Store{
 
     @Override
     public Base findById(String id) {
-        int idInt = Integer.parseInt(id);
-        return idInt >= 0 && idInt < this.size && this.base.get(idInt) != null ? (Base) this.base.get(idInt) : null;
+        int index = this.findIndex(id);
+        return index != -1 ? (Base) this.base.get(index) : null;
+    }
+
+    private int findIndex(String id) {
+        int index = -1;
+        for (int i = 0; i != this.size; i++) {
+            if (((Base) this.base.get(i)).getId().equals(id)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

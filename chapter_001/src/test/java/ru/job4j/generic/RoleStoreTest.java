@@ -13,26 +13,26 @@ public class RoleStoreTest {
 
     @Before
     public void start() {
-        this.roleStore.add(new Role("0", "Hulk", "Marvel"));
-        this.roleStore.add(new Role("1", "Super-Man", "DC"));
+        this.roleStore.add(new Role("10", "Hulk", "Marvel"));
+        this.roleStore.add(new Role("20", "Super-Man", "DC"));
     }
 
     @Test
     public void whenGetFirstIndex() {
-        assertThat(((Role) this.roleStore.findById("0")).getFilm(), is("Marvel"));
+        assertThat(((Role) this.roleStore.findById("10")).getFilm(), is("Marvel"));
     }
 
     @Test
     public void whenRemoveLastIndex() {
-        this.roleStore.delete("0");
-        assertThat(((Role) this.roleStore.findById("0")).getFilm(), is("DC"));
-        Assert.assertNull(this.roleStore.findById("1"));
+        this.roleStore.delete("10");
+        assertThat(((Role) this.roleStore.findById("20")).getFilm(), is("DC"));
+        Assert.assertNull(this.roleStore.findById("10"));
     }
 
     @Test
     public void whenReplaceFirstIndex() {
-        roleStore.replace("1", new Role("1", "Rapunciy", "Disney"));
-        assertThat(((Role) this.roleStore.findById("0")).getFilm(), is("Marvel"));
-        assertThat(((Role) this.roleStore.findById("1")).getFilm(), is("Disney"));
+        roleStore.replace("20", new Role("20", "Rapunciy", "Disney"));
+        assertThat(((Role) this.roleStore.findById("10")).getFilm(), is("Marvel"));
+        assertThat(((Role) this.roleStore.findById("20")).getFilm(), is("Disney"));
     }
 }

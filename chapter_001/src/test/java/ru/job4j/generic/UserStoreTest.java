@@ -12,25 +12,25 @@ public class UserStoreTest {
 
     @Before
     public void start() {
-        this.userStore.add(new User("0", "Kirill", 25));
-        this.userStore.add(new User("1", "Petr", 35));
+        this.userStore.add(new User("10", "Kirill", 25));
+        this.userStore.add(new User("20", "Petr", 35));
     }
 
     @Test
     public void whenGetFirstIndex() {
-        assertThat(((User) this.userStore.findById("0")).getName(), is("Kirill"));
+        assertThat(((User) this.userStore.findById("10")).getName(), is("Kirill"));
     }
 
     @Test
     public void whenRemoveLastIndex() {
-        this.userStore.delete("1");
-        assertThat(((User) this.userStore.findById("0")).getName(), is("Kirill"));
+        this.userStore.delete("20");
+        assertThat(((User) this.userStore.findById("10")).getName(), is("Kirill"));
     }
 
     @Test
     public void whenReplaceFirstIndex() {
-        this.userStore.replace("0", new User("0", "Ivan", 45));
-        assertThat(((User) this.userStore.findById("0")).getName(), is("Ivan"));
-        assertThat(((User) this.userStore.findById("1")).getName(), is("Petr"));
+        this.userStore.replace("10", new User("30", "Ivan", 45));
+        assertThat(((User) this.userStore.findById("30")).getName(), is("Ivan"));
+        assertThat(((User) this.userStore.findById("20")).getName(), is("Petr"));
     }
 }
