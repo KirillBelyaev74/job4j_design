@@ -2,22 +2,23 @@ package ru.job4j.generic;
 
 public abstract class AbstractStore<T extends Base> implements Store {
 
-    private SimpleArray<Base> base;
+    private SimpleArray<Base> elements;
     private int size;
 
     public AbstractStore(int size) {
-        this.base = new SimpleArray<>(size);
+        this.elements = new SimpleArray<>(size);
         this.size = size;
     }
 
     @Override
     public void add(Base model) {
-        this.base.add(model);
+        this.elements.add(model);
     }
 
     @Override
     public boolean replace(String id, Base model) {
-        return this.base.set(this.findIndex(id), model);
+        int index = this.findIndex(id);
+        return index != -1 && this.elements.set(index, model);
     }
 
     @Override
@@ -25,7 +26,7 @@ public abstract class AbstractStore<T extends Base> implements Store {
         boolean result = false;
         int index = this.findIndex(id);
         if (index != -1) {
-            this.base.remove(index);
+            this.elements.remove(index);
             this.size--;
             result = true;
         }
@@ -35,13 +36,13 @@ public abstract class AbstractStore<T extends Base> implements Store {
     @Override
     public Base findById(String id) {
         int index = this.findIndex(id);
-        return index != -1 ? (Base) this.base.get(index) : null;
+        return index != -1 ? this.elements.get(index) : null;
     }
 
     private int findIndex(String id) {
         int index = -1;
         for (int i = 0; i != this.size; i++) {
-            if (((Base) this.base.get(i)).getId().equals(id)) {
+            if (this.elements.get(i).getId().equals(id)) {
                 index = i;
                 break;
             }

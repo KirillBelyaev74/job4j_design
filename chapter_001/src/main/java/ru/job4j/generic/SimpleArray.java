@@ -30,9 +30,9 @@ public class SimpleArray<T> implements Iterable {
         return true;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
         Objects.checkIndex(index, this.array.length);
-        return this.array[index];
+        return (T) this.array[index];
     }
 
     @Override

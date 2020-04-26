@@ -18,6 +18,6 @@ public class SimpleArrayIterator<T> implements Iterator {
 
     @Override
     public Object next() {
-        return this.hasNext() ? this.array[this.position++] : null;
+        return this.hasNext() ? (T) this.array[this.position++] : null;
     }
 }
