@@ -38,25 +38,23 @@ public class SimpleArrayTest {
         assertThat(simpleArray.get(1), is(3));
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenToAddThenMistake() {
         simpleArray.add(4);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenToGetThenMistake() {
         simpleArray.get(3);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenToRemoveThenMistake() {
         simpleArray.remove(3);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenToSetThenMistake() {
         simpleArray.set(3, 9);
     }
-
-
 }
