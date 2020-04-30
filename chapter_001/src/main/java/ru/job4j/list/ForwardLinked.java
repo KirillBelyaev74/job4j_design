@@ -1,14 +1,19 @@
 package ru.job4j.list;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class ForwardLinked<T> implements Iterable<T> {
 
     private Node<T> head;
+    private int counter;
+    private int modCount;
 
     public void add(T value) {
-        Node<T> node = new Node<T>(value, null);
+        this.modCount++;
+        Node<T> node = new Node<T>(this.counter++, value, null);
         if (head == null) {
             head = node;
             return;
@@ -20,10 +25,25 @@ public class ForwardLinked<T> implements Iterable<T> {
         tail.next = node;
     }
 
+    public Node get(int index) {
+        Objects.checkIndex(index, this.counter);
+        this.modCount++;
+        Node<T> result = head;
+        while (result.next != null) {
+            if (result.index != index) {
+                result = result.next;
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+
     public Node<T> deleteFirst() {
         if (head == null) {
             throw new NoSuchElementException();
         }
+        this.modCount++;
         Node<T> del = head;
         head = head.next;
         return del;
@@ -32,6 +52,8 @@ public class ForwardLinked<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+
+            int expectedModCount = modCount;
             Node<T> node = head;
 
             @Override
@@ -41,6 +63,9 @@ public class ForwardLinked<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if (modCount  != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
@@ -51,13 +76,19 @@ public class ForwardLinked<T> implements Iterable<T> {
         };
     }
 
-    private static class Node<T> {
-        T value;
-        Node<T> next;
+    public static class Node<T> {
+        private int index;
+        private T value;
+        private Node<T> next;
 
-        public Node(T value, Node<T> next) {
+        private Node(int index, T value, Node<T> next) {
+            this.index = index;
             this.value = value;
             this.next = next;
+        }
+
+        public T getValue() {
+            return value;
         }
     }
 }
