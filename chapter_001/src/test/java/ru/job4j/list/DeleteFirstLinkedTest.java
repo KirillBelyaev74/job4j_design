@@ -42,6 +42,8 @@ public class DeleteFirstLinkedTest {
         linked.add(20);
         linked.add(30);
         assertThat(linked.get(0).getValue(), is(10));
+        assertThat(linked.get(1).getValue(), is(20));
+        assertThat(linked.get(2).getValue(), is(30));
     }
 
     @Test(expected = ConcurrentModificationException.class)

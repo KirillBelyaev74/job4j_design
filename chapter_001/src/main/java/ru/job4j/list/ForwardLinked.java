@@ -13,7 +13,8 @@ public class ForwardLinked<T> implements Iterable<T> {
 
     public void add(T value) {
         this.modCount++;
-        Node<T> node = new Node<T>(this.counter++, value, null);
+        this.counter++;
+        Node<T> node = new Node<T>(value, null);
         if (head == null) {
             head = node;
             return;
@@ -28,23 +29,19 @@ public class ForwardLinked<T> implements Iterable<T> {
     public Node get(int index) {
         Objects.checkIndex(index, this.counter);
         this.modCount++;
-        Node<T> result = head;
-        while (result.next != null) {
-            if (result.index != index) {
-                result = result.next;
-            } else {
-                break;
-            }
+        Node result = head;
+        for (int i = 1; i <= index; i++) {
+            result = result.next;
         }
         return result;
     }
 
-    public Node<T> deleteFirst() {
+    public T deleteFirst() {
         if (head == null) {
             throw new NoSuchElementException();
         }
         this.modCount++;
-        Node<T> del = head;
+        T del = head.value;
         head = head.next;
         return del;
     }
@@ -77,12 +74,10 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public static class Node<T> {
-        private int index;
         private T value;
         private Node<T> next;
 
-        private Node(int index, T value, Node<T> next) {
-            this.index = index;
+        private Node(T value, Node<T> next) {
             this.value = value;
             this.next = next;
         }
