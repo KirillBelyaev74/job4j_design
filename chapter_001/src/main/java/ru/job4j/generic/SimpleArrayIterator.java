@@ -1,6 +1,7 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SimpleArrayIterator<T> implements Iterator {
 
@@ -17,7 +18,10 @@ public class SimpleArrayIterator<T> implements Iterator {
     }
 
     @Override
-    public Object next() {
-        return this.hasNext() ? (T) this.array[this.position++] : null;
+    public T next() {
+        if (!this.hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return (T) this.array[this.position++];
     }
 }
