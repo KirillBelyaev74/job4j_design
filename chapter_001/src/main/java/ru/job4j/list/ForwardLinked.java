@@ -43,6 +43,7 @@ public class ForwardLinked<T> implements Iterable<T> {
             throw new NoSuchElementException();
         }
         this.modCount++;
+        this.counter--;
         T del = this.head.value;
         this.head = this.head.next;
         return del;
@@ -53,9 +54,14 @@ public class ForwardLinked<T> implements Iterable<T> {
             throw new NoSuchElementException();
         }
         this.modCount++;
+        this.counter--;
         T del = this.last.value;
         this.last = this.last.past;
         return del;
+    }
+
+    public int getCounter() {
+        return this.counter;
     }
 
     @Override

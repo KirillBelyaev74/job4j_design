@@ -9,16 +9,16 @@ public class SimpleStackTest {
     public void whenPushThenPoll() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
-        assertThat(stack.pop(), is(1));
+        assertThat(stack.popLast(), is(1));
     }
 
     @Test
     public void whenPushPollThenPushPoll() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
-        stack.pop();
+        stack.popLast();
         stack.push(2);
-        assertThat(stack.pop(), is(2));
+        assertThat(stack.popLast(), is(2));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class SimpleStackTest {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
         stack.push(2);
-        stack.pop();
-        assertThat(stack.pop(), is(1));
+        stack.popLast();
+        assertThat(stack.popLast(), is(1));
     }
 }
