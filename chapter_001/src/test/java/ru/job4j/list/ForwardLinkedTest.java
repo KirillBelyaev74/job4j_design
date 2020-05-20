@@ -53,4 +53,15 @@ public class ForwardLinkedTest {
         linked.add(20);
         it.next();
     }
+
+    @Test
+    public void when() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(10);
+        linked.add(20);
+        linked.add(30);
+        assertThat(linked.deleteLast(), is(30));
+        assertThat(linked.deleteLast(), is(20));
+        assertThat(linked.deleteLast(), is(10));
+    }
 }
