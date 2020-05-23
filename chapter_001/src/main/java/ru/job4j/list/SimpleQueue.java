@@ -6,10 +6,10 @@ public class SimpleQueue<T> {
     private final SimpleStack<T> out = new SimpleStack<>();
 
     public T poll() {
-        while (this.in.getSize() == 0) {
+        while (this.in.getSize() > 0) {
             this.out.push(this.in.popFirst());
         }
-        return this.in.popFirst();
+        return this.out.popFirst();
     }
 
     public void push(T value) {
