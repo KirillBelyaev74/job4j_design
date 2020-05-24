@@ -40,9 +40,9 @@ public class ForwardLinkedTest {
         linked.add(10);
         linked.add(20);
         linked.add(30);
-        assertThat(linked.get(0).getValue(), is(10));
-        assertThat(linked.get(1).getValue(), is(20));
-        assertThat(linked.get(2).getValue(), is(30));
+        assertThat(linked.get(0), is(10));
+        assertThat(linked.get(1), is(20));
+        assertThat(linked.get(2), is(30));
     }
 
     @Test(expected = ConcurrentModificationException.class)
@@ -63,5 +63,30 @@ public class ForwardLinkedTest {
         assertThat(linked.deleteLast(), is(30));
         assertThat(linked.deleteLast(), is(20));
         assertThat(linked.deleteLast(), is(10));
+    }
+
+    @Test
+    public void whenAddThenIter() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        linked.add(2);
+        Iterator<Integer> it = linked.iterator();
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+    }
+
+    @Test
+    public void whenAddAndRevertThenIter() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        linked.add(2);
+        linked.add(3);
+        linked.add(4);
+        linked.revert();
+        Iterator<Integer> it = linked.iterator();
+        assertThat(it.next(), is(4));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(1));
     }
 }
