@@ -20,6 +20,17 @@ public class SimpleArray<T> implements Iterable<T> {
         return (T) this.container[index];
     }
 
+    public boolean contains(T t) {
+        boolean result = true;
+        for (int index = 0; index != this.counter; index++) {
+            if (this.container[index].equals(t)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
     @Override
     public Iterator<T> iterator() {
 
