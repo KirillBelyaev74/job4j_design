@@ -21,10 +21,10 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public boolean contains(T t) {
-        boolean result = true;
+        boolean result = false;
         for (int index = 0; index != this.counter; index++) {
             if (this.container[index].equals(t)) {
-                result = false;
+                result = true;
                 break;
             }
         }

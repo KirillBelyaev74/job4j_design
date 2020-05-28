@@ -8,7 +8,7 @@ public class SimpleSet<T> implements Iterable {
     private SimpleArray<T> array = new SimpleArray<>();
 
     public void add(T t) {
-        if (this.array.contains(t)) {
+        if (!this.array.contains(t)) {
             this.array.add(t);
         }
     }
