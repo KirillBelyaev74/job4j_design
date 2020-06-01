@@ -12,7 +12,7 @@ public class MapUserTest {
         mapUser.compareUser(new User("Kirill", 0, calendar));
         mapUser.compareUser(new User("Kirill", 0, calendar));
         for (User user : mapUser.getMap().keySet()) {
-            System.out.println(user.getName());
+            System.out.println(user.getName() + " " + user.hashCode());
         }
     }
 }
