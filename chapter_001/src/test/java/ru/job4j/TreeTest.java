@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class TreeTest {
+
     @Test
     public void when6ElFindLastThen6() {
         Tree<Integer> tree = new Tree<>(1);
@@ -17,6 +18,16 @@ public class TreeTest {
         assertThat(
                 tree.findBy(6).isPresent(),
                 is(true)
+        );
+    }
+
+    @Test
+    public void when() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        assertThat(
+                tree.add(1, 2),
+                is(false)
         );
     }
 

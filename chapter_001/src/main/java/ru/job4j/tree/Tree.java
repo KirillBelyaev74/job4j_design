@@ -1,6 +1,5 @@
 package ru.job4j.tree;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class Tree<E> implements SimpleTree<E> {
 
@@ -14,7 +13,7 @@ public class Tree<E> implements SimpleTree<E> {
     public boolean add(E parent, E child) {
         boolean result = false;
         Optional<Node<E>> treeNode = findBy(parent);
-        if (treeNode.isPresent()) {
+        if (treeNode.isPresent() && findBy(child).isEmpty()) {
             treeNode.get().children.add(new Node<>(child));
             result = true;
         }
