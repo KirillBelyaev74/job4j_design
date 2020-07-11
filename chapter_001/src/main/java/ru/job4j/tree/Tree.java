@@ -26,13 +26,27 @@ public class Tree<E> implements SimpleTree<E> {
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            if (el.value.equals(value)) {
-                rsl = Optional.of(el);
+            Node<E> element = data.poll();
+            if (element.value.equals(value)) {
+                rsl = Optional.of(element);
                 break;
             }
-            data.addAll(el.children);
+            data.addAll(element.children);
         }
         return rsl;
+    }
+
+    public boolean isBinary() {
+        boolean result = false;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> element = data.poll();
+            if (element.children.size() > 2) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }

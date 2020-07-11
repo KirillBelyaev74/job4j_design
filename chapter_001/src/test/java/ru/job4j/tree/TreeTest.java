@@ -1,7 +1,5 @@
-package ru.job4j;
-
+package ru.job4j.tree;
 import org.junit.Test;
-import ru.job4j.tree.Tree;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -22,7 +20,7 @@ public class TreeTest {
     }
 
     @Test
-    public void when() {
+    public void whenChild2ExistThenFalse() {
         Tree<Integer> tree = new Tree<>(1);
         tree.add(1, 2);
         assertThat(
@@ -39,5 +37,20 @@ public class TreeTest {
                 tree.findBy(7).isPresent(),
                 is(false)
         );
+    }
+
+    @Test
+    public void when3ElementAddThenTrue() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void when1ElementAddThenFalse() {
+        Tree<Integer> tree = new Tree<>(1);
+        assertThat(tree.isBinary(), is(false));
     }
 }
