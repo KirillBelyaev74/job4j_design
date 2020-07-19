@@ -1,38 +1,31 @@
 package ru.job4j.analize;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Analize {
 
 
     public Info diff(List<User> previous, List<User> current) {
-        int added = this.addUsers(previous, current);
-        int changed = this.changedUsers(previous, current);
+
+        int added = 0;
+        int changed = 0;
+
+        Map<Integer, String> mapPrevious = this.listToMap(previous);
+
+        for (int index = 0; index != current.size() && index != mapPrevious.size(); index++) {
+            User user = current.get(index);
+            if (mapPrevious.containsValue(user.name) && mapPrevious.containsKey(user.id)) {
+                added++;
+            } else if (mapPrevious.containsValue(user.name) && !mapPrevious.containsKey(user.id)) {
+                changed++;
+            }
+        }
         return new Analize.Info(added, changed, previous.size() - added - changed);
     }
 
-    public int addUsers(List<User> previous, List<User> current) {
-        int added = 0;
-        for (int left = 0; left != current.size() && left != previous.size(); left++) {
-            if (previous.contains(current.get(left))) {
-                added++;
-            }
-        }
-        return added;
-    }
-
-    public int changedUsers(List<User> previous, List<User> current) {
-        int changed = 0;
-        for (int left = 0; left != previous.size(); left++) {
-            for (int right = 0; right != current.size(); right++) {
-                if (previous.get(left).name.equals(current.get(right).name) &&
-                        previous.get(left).id != current.get(right).id) {
-                    changed++;
-                    break;
-                }
-            }
-        }
-        return changed;
+    public Map<Integer, String> listToMap(List<User> previous) {
+        Map<Integer, String> mapPrevious = new HashMap<>();
+        previous.forEach(p -> mapPrevious.put(p.id, p.name));
+        return mapPrevious;
     }
 
     public static class User {
