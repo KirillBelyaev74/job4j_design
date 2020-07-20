@@ -19,7 +19,11 @@ public class AnalizeTest {
 
         List<Analize.User> previous = List.of(kirill, kostya, ivan, petr, maxim);
 
-        List<Analize.User> current = List.of(ivan, kostya, new Analize.User(100, "Maxim"));
+        List<Analize.User> current = List.of(
+                ivan,
+                kostya,
+                new Analize.User(100, "Maxim"),
+                new Analize.User(200, "Sergey"));
 
         Analize.Info result = analize.diff(previous, current);
 

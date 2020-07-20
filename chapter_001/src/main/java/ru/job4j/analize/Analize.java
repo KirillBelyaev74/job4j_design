@@ -11,11 +11,11 @@ public class Analize {
 
         Map<Integer, String> mapPrevious = this.listToMap(previous);
 
-        for (int index = 0; index != current.size() && index != mapPrevious.size(); index++) {
-            User user = current.get(index);
-            if (mapPrevious.containsValue(user.name) && mapPrevious.containsKey(user.id)) {
+        for (User user : current) {
+            String userNamePrevious = mapPrevious.get(user.id);
+            if (userNamePrevious != null && userNamePrevious.equals(user.name)) {
                 added++;
-            } else if (mapPrevious.containsValue(user.name) && !mapPrevious.containsKey(user.id)) {
+            } else if (mapPrevious.containsValue(user.name)) {
                 changed++;
             }
         }
