@@ -16,18 +16,37 @@ public class AnalizeTest {
         Analize.User ivan = new Analize.User(30, "Ivan");
         Analize.User petr = new Analize.User(40, "Petr");
         Analize.User maxim = new Analize.User(50, "Maxim");
+        Analize.User danil = new Analize.User(60, "Danil");
 
-        List<Analize.User> previous = List.of(kirill, kostya, ivan, petr, maxim);
+        List<Analize.User> previous = List.of(kirill, kostya, ivan, petr, maxim, danil);
 
         List<Analize.User> current = List.of(
                 ivan,
                 kostya,
-                new Analize.User(100, "Maxim"),
-                new Analize.User(200, "Sergey"));
+                danil,
+                new Analize.User(50, "Sergey"));
 
         Analize.Info result = analize.diff(previous, current);
 
-        Analize.Info info = new Analize.Info(2, 1,2);
+        Analize.Info info = new Analize.Info(2, 1,3);
+
+        assertThat(info, is(result));
+    }
+
+    @Test
+    public void whenNoAdd() {
+
+        Analize analize = new Analize();
+
+        Analize.User kirill = new Analize.User(10, "Kirill");
+
+        List<Analize.User> previous = List.of(kirill);
+
+        List<Analize.User> current = List.of(kirill);
+
+        Analize.Info result = analize.diff(previous, current);
+
+        Analize.Info info = new Analize.Info(0, 0,1);
 
         assertThat(info, is(result));
     }
