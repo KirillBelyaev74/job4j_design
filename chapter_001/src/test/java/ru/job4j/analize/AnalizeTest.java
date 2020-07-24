@@ -28,7 +28,7 @@ public class AnalizeTest {
 
         Analize.Info result = analize.diff(previous, current);
 
-        Analize.Info info = new Analize.Info(2, 1,3);
+        Analize.Info info = new Analize.Info(2, 1,2);
 
         assertThat(info, is(result));
     }
@@ -46,7 +46,7 @@ public class AnalizeTest {
 
         Analize.Info result = analize.diff(previous, current);
 
-        Analize.Info info = new Analize.Info(0, 0,1);
+        Analize.Info info = new Analize.Info(0, 0,0);
 
         assertThat(info, is(result));
     }

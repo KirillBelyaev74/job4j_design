@@ -7,19 +7,19 @@ public class Analize {
     public Info diff(List<User> previous, List<User> current) {
 
         int changed = 0;
-        int deleted = 0;
+        int have = 0;
 
         Map<Integer, String> mapPrevious = this.listToMap(previous);
 
         for (User user : current) {
             String userNamePrevious = mapPrevious.get(user.id);
-            if (userNamePrevious.equals(user.name)) {
-                deleted++;
+            if (userNamePrevious != null && userNamePrevious.equals(user.name)) {
+                have++;
             } else {
                 changed++;
             }
         }
-        return new Analize.Info(previous.size() - deleted - changed, changed, deleted);
+        return new Analize.Info(previous.size() - have - changed, changed, previous.size() - have - changed);
     }
 
     public Map<Integer, String> listToMap(List<User> previous) {
