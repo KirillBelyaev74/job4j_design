@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +15,16 @@ public class LogFilter {
         return result;
     }
 
+    public static void save(List<String> log, String file) throws FileNotFoundException {
+        try (PrintWriter printWriter = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
+            log.forEach(s -> printWriter.write(s + "\r"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws IOException {
-        List<String> log = filter("404");
-        log.forEach(System.out::println);
+        List<String> log = filter("log.txt");
+        save(log, "404.txt");
     }
 }
