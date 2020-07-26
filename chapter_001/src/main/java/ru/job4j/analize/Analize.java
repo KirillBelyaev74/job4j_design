@@ -19,7 +19,7 @@ public class Analize {
                 changed++;
             }
         }
-        return new Analize.Info(previous.size() - have - changed, changed, previous.size() - have - changed);
+        return new Analize.Info(previous.size() - have, changed, previous.size() - have - changed);
     }
 
     public Map<Integer, String> listToMap(List<User> previous) {
