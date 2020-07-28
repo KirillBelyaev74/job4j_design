@@ -13,16 +13,9 @@ public class Config {
 
     public void load() throws IOException {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path))) {
-            bufferedReader.lines().forEach(this.lines::add);
+            bufferedReader.lines().forEach(s -> this.values.put(s.substring(0, s.indexOf("=")), s.substring(s.indexOf("=") + 1)));
         } catch (FileNotFoundException fnfe){
             fnfe.printStackTrace();
-        }
-        this.separation();
-    }
-
-    public void separation() {
-        for (String line : this.lines) {
-            this.values.put(line.substring(0, line.indexOf("=")), line.substring(line.indexOf("=") + 1));
         }
     }
 
