@@ -5,7 +5,6 @@ import java.util.*;
 public class Config {
     private final String path;
     private final Map<String, String> values = new HashMap<String, String>();
-    private List<String> lines = new ArrayList<>();
 
     public Config(final String path) {
         this.path = path;
@@ -13,7 +12,11 @@ public class Config {
 
     public void load() throws IOException {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path))) {
-            bufferedReader.lines().forEach(s -> this.values.put(s.substring(0, s.indexOf("=")), s.substring(s.indexOf("=") + 1)));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                int index = line.replaceAll("\\\\s*(#[a-zA-Z1-9]*)", "").indexOf("=");
+                this.values.put(line.substring(0,index), line.substring(index + 1));
+            }
         } catch (FileNotFoundException fnfe){
             fnfe.printStackTrace();
         }
