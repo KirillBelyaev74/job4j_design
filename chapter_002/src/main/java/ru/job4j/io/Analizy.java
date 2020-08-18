@@ -11,10 +11,10 @@ public class Analizy {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (!value & (line.contains("400") || line.contains("500"))) {
-                    list.add(line.substring(line.indexOf(" ") + 1) + System.lineSeparator());
+                    list.add(line.substring(line.indexOf(" ") + 1));
                     value = true;
                 } else  if (value && (!line.contains("400") && !line.contains("500"))) {
-                    list.add(line.substring(line.indexOf(" ") + 1) + System.lineSeparator());
+                    list.add(line.substring(line.indexOf(" ") + 1));
                     value = false;
                 }
             }
@@ -26,7 +26,7 @@ public class Analizy {
 
     public void recordMistakes(String target, List<String> list) {
         try (PrintWriter printWriter = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
-            list.forEach(printWriter::write);
+            list.forEach(element -> printWriter.write(element + System.lineSeparator()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
