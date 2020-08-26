@@ -16,11 +16,11 @@ public class AnalizyTest {
         File source = folder.newFile("with_errors.csv");
         File target = folder.newFile("without_errors.csv");
         List<String> list = List.of(
-                "200 10:56:01\n",
-                "500 10:57:01\n",
-                "400 10:58:01\n",
-                "200 10:59:01\n",
-                "500 11:01:02\n",
+                "200 10:56:01" + System.lineSeparator(),
+                "500 10:57:01" + System.lineSeparator(),
+                "400 10:58:01" + System.lineSeparator(),
+                "200 10:59:01" + System.lineSeparator(),
+                "500 11:01:02" + System.lineSeparator(),
                 "200 11:02:02");
         try (PrintWriter printWriter = new PrintWriter(new BufferedOutputStream(new FileOutputStream(source)))) {
             list.forEach(printWriter::write);
