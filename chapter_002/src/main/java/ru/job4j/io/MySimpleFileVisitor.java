@@ -3,22 +3,22 @@ import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.function.Predicate;
 
 class MySimpleFileVisitor extends SimpleFileVisitor<Path> {
 
     private List<Path> list = new LinkedList<>();
-    private String exclude;
     private String directory;
+    private Predicate<Path> predicate;
 
-    public MySimpleFileVisitor(String exclude, String directory) {
-        this.exclude = exclude;
+    public MySimpleFileVisitor(String directory, Predicate<Path> predicate) {
         this.directory = directory;
+        this.predicate = predicate;
     }
 
     @Override
-    public FileVisitResult visitFile(Path files, BasicFileAttributes attrs) throws IOException {
-        String fileName = files.toAbsolutePath().normalize().toString();
-        if (!files.toFile().getName().endsWith(this.exclude) && !fileName.contains("\\.git\\") && !fileName.contains("\\.idea\\")) {
+    public FileVisitResult visitFile(Path files, BasicFileAttributes attrs) {
+        if (this.predicate.test(files)) {
             this.list.add(Paths.get(this.directory).relativize(files));
         }
         return FileVisitResult.CONTINUE;

@@ -14,7 +14,9 @@ public class Zip {
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (Path path : sources) {
                 zipOutputStream.putNextEntry(new ZipEntry(path.toString()));
-                Files.copy(path, zipOutputStream);
+                try (BufferedInputStream  bufferedInputStream  = new BufferedInputStream (new FileInputStream(path.toString()))) {
+                    zipOutputStream.write(bufferedInputStream.readAllBytes());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -24,7 +26,7 @@ public class Zip {
     public void start(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
         String directory = argZip.directory();
-        MySimpleFileVisitor mySimpleFileVisitor = new MySimpleFileVisitor(argZip.exclude(), directory);
+        MySimpleFileVisitor mySimpleFileVisitor = new MySimpleFileVisitor(directory, element -> !element.toFile().getName().endsWith(argZip.exclude()));
         Files.walkFileTree(Paths.get(directory), mySimpleFileVisitor);
         this.packFiles(mySimpleFileVisitor.getFiles(), new File(directory + argZip.output()));
     }
