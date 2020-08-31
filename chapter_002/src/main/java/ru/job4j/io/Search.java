@@ -19,7 +19,7 @@ public class Search {
     }
 
     public static void validate(String[] args) throws FileNotFoundException {
-        if (args[1] == null) {
+        if (args[0] == null && args[1] == null) {
             throw new IllegalArgumentException();
         }
         if (!Files.exists(Paths.get(args[0]))) {
