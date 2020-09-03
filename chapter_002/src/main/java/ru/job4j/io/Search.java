@@ -19,6 +19,9 @@ public class Search {
     }
 
     public static void validate(String[] args) throws FileNotFoundException {
+        if (!(args.length == 2)) {
+            throw new IllegalArgumentException();
+        }
         if (args[0] == null && args[1] == null) {
             throw new IllegalArgumentException();
         }
