@@ -9,8 +9,7 @@ public class FindFile {
 
         SelectionArguments selectionArguments = new SelectionArguments(args);
 
-        MySimpleFileVisitor mySimpleFileVisitor = new MySimpleFileVisitor(
-                element -> element.getFileName().toString().contains(selectionArguments.findFileName()));
+        MySimpleFileVisitor mySimpleFileVisitor = new MySimpleFileVisitor(selectionArguments.getPredicate());
 
         Files.walkFileTree(Paths.get(selectionArguments.directory()), mySimpleFileVisitor);
 
