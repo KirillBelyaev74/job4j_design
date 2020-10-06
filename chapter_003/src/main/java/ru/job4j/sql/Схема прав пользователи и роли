@@ -1,12 +1,12 @@
 create table role(
-    id serial primary key,
-    name varchar(20) not null);
+     id serial primary key,
+     name varchar(20) not null);
 
 create table users(
-    id serial primary key,
-    name varchar(30) not null,
-    date date not null,
-    role_id smallint references role (id));
+     id serial primary key,
+     name varchar(30) not null,
+     date date not null,
+     role_id smallint references role (id));
 
 create table rules(
     id serial primary key,

@@ -32,20 +32,27 @@ insert into product(name, type_id, expired_date, price) VALUES ('Хороший 
 --1. Написать запрос получение всех продуктов с типом "СЫР"
 select type.name, product.name, price, expired_date from product join type on (type.id = product.type_id)
 where type.name = 'Сыр';
+
 --2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
 select * from product where name like '%мороженное%';
+
 --3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце
 select * from product where expired_date > current_date + interval '1 month';
+
 --4. Написать запрос, который выводит самый дорогой продукт
 select * from product where price = (select max(price) from product);
+
 --5. Написать запрос, который выводит количество всех продуктов определенного типа
 select type.name, product.name, price, expired_date from product join type on (type.id = product.type_id)
 where type.name = 'Кефир';
+
 --6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
 select type.name, product.name, price, expired_date from product join type on (type.id = product.type_id)
 where type.name in ('Сыр', 'Молоко') order by type.name;
+
 --7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук
 select * from product group by id having count(product.type_id) < 10;
+
 --8. Вывести все продукты и их тип
 select type.name, product.name, price, expired_date from product join type on (type.id = product.type_id)
 order by type.name;
