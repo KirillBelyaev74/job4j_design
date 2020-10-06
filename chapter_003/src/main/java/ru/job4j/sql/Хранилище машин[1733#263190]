@@ -1,0 +1,53 @@
+create database cars;
+
+create table bodywork (
+                          id serial primary key,
+                          name varchar(20) not null unique);
+
+create table engine (
+                        id serial primary key,
+                        engine_volume numeric(2, 1) unique not null);
+
+create table transmission (
+                              id serial primary key,
+                              name varchar(20) unique not null);
+
+create table cars (
+                      id serial primary key,
+                      name varchar(10) unique not null,
+                      bodywork_id smallint references bodywork(id),
+                      engine_id smallint references engine(id),
+                      transmission_id smallint references transmission(id));
+
+insert into bodywork (name) values ('sedan');
+insert into bodywork (name) values ('universal');
+insert into bodywork (name) values ('coupe');
+insert into bodywork (name) values ('cabriolet');
+insert into engine (engine_volume) values (1.4);
+insert into engine (engine_volume) values (1.6);
+insert into engine (engine_volume) values (2.0);
+insert into engine (engine_volume) values (2.2);
+insert into transmission (name) values ('DQ200');
+insert into transmission (name) values ('DL501');
+insert into transmission (name) values ('DL382F');
+insert into transmission (name) values ('DQ250');
+insert into cars (name, bodywork_id, engine_id, transmission_id) values ('audi a8', 1, 4, 3);
+insert into cars (name, bodywork_id, engine_id, transmission_id) values ('audi a6', 2, 3, 2);
+insert into cars (name, bodywork_id, engine_id, transmission_id) values ('audi a5', 3, 2, 1);
+insert into cars (name) values ('audi a7');
+
+--1. Вывести список всех машин и все привязанные к ним детали.
+select c.name "name", b.name "bodywork", e.engine_volume "engine", t.name "transmission"
+from cars as c left join bodywork as b on (c.bodywork_id = b.id)
+               left join engine as e on (c.engine_id = e.id)
+               left join transmission as t on (c.transmission_id = t.id);
+
+--2. Вывести отдельно детали, которые не используются в машине, кузова, двигатели, коробки передач.
+select name from bodywork
+where not exists(select * from cars where cars.bodywork_id = bodywork.id);
+
+select engine_volume from engine
+where not exists(select * from cars where cars.bodywork_id = engine.id);
+
+select name from transmission
+where not exists(select * from cars where cars.bodywork_id = transmission.id);
