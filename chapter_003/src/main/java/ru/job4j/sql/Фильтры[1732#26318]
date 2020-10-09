@@ -28,6 +28,7 @@ insert into product(name, type_id, expired_date, price) VALUES ('Хороший 
 insert into product(name, type_id, expired_date, price) VALUES ('Хороший кефир', 4, '08-10-2020', 57.2);
 insert into product(name, type_id, expired_date, price) VALUES ('Хороший сыр', 1, '12-10-2020', 98);
 insert into product(name, type_id, expired_date, price) VALUES ('Хороший шоколад', 6, '20-11-2020', 35);
+insert into product(name, type_id, expired_date, price) VALUES ('Средний шоколад', 6, '20-12-2020', 35);
 
 --1. Написать запрос получение всех продуктов с типом "СЫР"
 select type.name, product.name, price, expired_date from product join type on (type.id = product.type_id)
@@ -37,7 +38,7 @@ where type.name = 'Сыр';
 select * from product where name like '%мороженное%';
 
 --3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце
-select * from product where expired_date > current_date + interval '1 month';
+select * from product where (extract(month from expired_date) - extract(month from current_date)) = 1;
 
 --4. Написать запрос, который выводит самый дорогой продукт
 select * from product where price = (select max(price) from product);
