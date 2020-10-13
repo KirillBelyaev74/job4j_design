@@ -52,7 +52,8 @@ select type.name, product.name, price, expired_date from product join type on (t
 where type.name in ('Сыр', 'Молоко') order by type.name;
 
 --7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук
-select * from product group by id having count(product.type_id) < 10;
+select type.name, count(*) from product join type on (product.type_id = type.id)
+group by type.name having count(type.name) < 10;
 
 --8. Вывести все продукты и их тип
 select type.name, product.name, price, expired_date from product join type on (type.id = product.type_id)
