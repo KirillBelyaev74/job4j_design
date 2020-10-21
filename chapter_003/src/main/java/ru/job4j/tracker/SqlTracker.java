@@ -13,9 +13,9 @@ public class SqlTracker implements Store {
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
             this.connection = DriverManager.getConnection(
-                    config.getProperty("db.host"),
-                    config.getProperty("db.login"),
-                    config.getProperty("db.password"));
+                    config.getProperty("host"),
+                    config.getProperty("login"),
+                    config.getProperty("password"));
             this.createTable();
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -42,13 +42,9 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
         try (PreparedStatement preparedStatement = this.connection.prepareStatement(
-                "insert into item(name) values (initcap(?));", Statement.RETURN_GENERATED_KEYS)) {
+                "insert into items(name) values (initcap(?));", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, item.getName());
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                new Item(String.valueOf(resultSet.getInt("id")), resultSet.getString("name"));
-            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -59,9 +55,9 @@ public class SqlTracker implements Store {
     public boolean replace(String id, Item item) {
         ResultSet resultSet = null;
         try (PreparedStatement preparedStatement = this.connection.prepareStatement(
-                "update item set name = initcap(?) where item_id = ?;")) {
-            preparedStatement.setString(2, item.getName());
-            preparedStatement.setInt(3, Integer.parseInt(id));
+                "update items set name = initcap(?) where id = ?;")) {
+            preparedStatement.setString(1, item.getName());
+            preparedStatement.setInt(2, Integer.parseInt(id));
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
         } catch (SQLException throwables) {
@@ -74,7 +70,7 @@ public class SqlTracker implements Store {
     public boolean delete(String id) {
         int result = -1;
         try (PreparedStatement preparedStatement = this.connection.prepareStatement(
-                "delete from item where id = ?;")) {
+                "delete from items where id = ?;")) {
             preparedStatement.setInt(1, Integer.parseInt(id));
             result = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
@@ -87,7 +83,7 @@ public class SqlTracker implements Store {
     public List<Item> findAll() {
         List<Item> list = new LinkedList<>();
         try (Statement statement = this.connection.createStatement()) {
-            statement.executeQuery("select * from item;");
+            statement.executeQuery("select * from items;");
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 list.add(new Item(
@@ -104,7 +100,7 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> list = new LinkedList<>();
         try (PreparedStatement preparedStatement = this.connection.prepareStatement(
-                "select * from item where name = ?;")) {
+                "select * from items where name = ?;")) {
             preparedStatement.setString(1, key);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -123,7 +119,7 @@ public class SqlTracker implements Store {
     public Item findById(String id) {
         Item item = null;
         try (PreparedStatement preparedStatement = this.connection.prepareStatement(
-                "select * from item where id = ?;")) {
+                "select * from items where id = ?;")) {
             preparedStatement.setInt(1, Integer.parseInt(id));
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -136,5 +132,22 @@ public class SqlTracker implements Store {
             throwables.printStackTrace();
         }
         return item;
+    }
+
+    public static void main(String[] args) {
+        Input validate = new ValidateInput(new ConsoleInput());
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            ArrayList<BaseAction> actions = new ArrayList<>();
+            actions.add(new CreateAction(0, "Добавление"));
+            actions.add(new ReplaceAction(1, "Редактирование"));
+            actions.add(new DeleteAction(2, "Удаление"));
+            actions.add(new FindAllAction(3, "Показать все"));
+            actions.add(new FindByNameAction(4, "Найти по имени"));
+            actions.add(new FindByIdAction(5, "Найти по ID"));
+            new StartUI(validate, tracker, System.out::println).init(actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
