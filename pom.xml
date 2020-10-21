@@ -38,6 +38,18 @@
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
+        <profile>
+            <id>travis</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.url>jdbc:postgresql://localhost:5432/postgres</db.url>
+                <db.username>postgres</db.username>
+                <db.password>7508</db.password>
+                <db.driver>org.postgresql.Driver</db.driver>
+            </properties>
+        </profile>
     </profiles>
     <dependencies>
         <dependency>
