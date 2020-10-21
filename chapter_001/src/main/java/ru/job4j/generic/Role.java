@@ -31,11 +31,14 @@ public class Role extends Base {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Role role1 = (Role) o;
-        return Objects.equals(role, role1.role) &&
-                Objects.equals(film, role1.film);
+        return Objects.equals(role, role1.role) && Objects.equals(film, role1.film);
     }
 
     @Override
@@ -45,9 +48,6 @@ public class Role extends Base {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "role='" + role + '\'' +
-                ", film='" + film + '\'' +
-                '}';
+        return "Role{" + "role='" + role + '\'' + ", film='" + film + '\'' + '}';
     }
 }

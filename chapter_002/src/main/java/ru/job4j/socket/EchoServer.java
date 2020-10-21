@@ -1,4 +1,5 @@
 package ru.job4j.socket;
+
 import java.io.*;
 import java.net.*;
 
@@ -12,7 +13,7 @@ public class EchoServer {
                      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
                     String line;
                     String message = null;
-                    while (!(line = in.readLine()).isEmpty()) {
+                    while ((line = in.readLine()) != null) {
                         if (line.contains("msg=") && line.contains("exit")) {
                             return;
                         } else if (line.contains("msg=")) {

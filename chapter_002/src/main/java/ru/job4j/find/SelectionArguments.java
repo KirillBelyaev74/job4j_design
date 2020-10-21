@@ -56,7 +56,7 @@ public class SelectionArguments {
         Predicate<Path> result = null;
         String key = this.args.get("-n");
         Map<String, Predicate<Path>> predicateMap = Map.of(
-                "-m" , element -> element.getFileName().toString().matches(key.replace("*", "(.*)")),
+                "-m", element -> element.getFileName().toString().matches(key.replace("*", "(.*)")),
                 "-f", element -> element.getFileName().toString().equalsIgnoreCase(key),
                 "-r", element -> element.getFileName().toString().matches(key));
         for (String keyPredicate : predicateMap.keySet()) {

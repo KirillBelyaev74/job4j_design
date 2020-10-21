@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public class MatrixIterator implements Iterator {
 
-    private int arr[][];
+    private int[][] arr;
     private int x;
     private int y;
     private int result;

@@ -1,4 +1,5 @@
 package ru.job4j.io;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -14,11 +15,6 @@ public class Chat {
     private Path answerPath;
     private Path dialogPath;
 
-    /**
-     * Конструктор
-     * @param answerPath - Файл с ответами
-     * @param dialogPath - Файл с записями диалога
-     */
     public Chat(Path answerPath, Path dialogPath) {
         this.answerPath = answerPath;
         this.dialogPath = dialogPath;
@@ -26,6 +22,7 @@ public class Chat {
 
     /**
      * Получает ответы из файла answerPath, если он существует и записывает в коллецию answers
+     *
      * @throws IOException
      */
     public void getAnswers() throws IOException {
@@ -37,6 +34,7 @@ public class Chat {
 
     /**
      * Получает вопрос от пользователя
+     *
      * @return вопрос от пользователя
      */
     public String getQuestions() {
@@ -45,6 +43,7 @@ public class Chat {
 
     /**
      * Выводит сообщение в консоль и добавляет его в коллекцию dialog
+     *
      * @param message - сообщение
      */
     public void writeConsoleAndList(String message) {
@@ -54,6 +53,7 @@ public class Chat {
 
     /**
      * Записывает весь диалог из коллекции dialog в файл dialogPath
+     *
      * @throws IOException
      */
     public void writeDialog() throws IOException {
@@ -62,11 +62,12 @@ public class Chat {
 
     /**
      * Чат
+     *
      * @throws IOException
      */
     public void chat() throws IOException {
         this.getAnswers();
-        writeConsoleAndList(System.lineSeparator() +"Задайте вопрос : ");
+        writeConsoleAndList("Задайте вопрос : ");
         String question = this.getQuestions();
         writeConsoleAndList(YOUASKQUESTION + question + ". ");
         if (question.equalsIgnoreCase(this.FINISH)) {
@@ -83,7 +84,7 @@ public class Chat {
         this.chat();
     }
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
         Chat chat = new Chat(
                 Paths.get(".\\chapter_002\\data\\answer.txt").toAbsolutePath().normalize(),
                 Paths.get(".\\chapter_002\\data\\dialog.txt").toAbsolutePath().normalize());

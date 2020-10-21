@@ -1,4 +1,5 @@
 package ru.job4j.analize;
+
 import java.util.*;
 
 public class Analize {
@@ -55,11 +56,14 @@ public class Analize {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             User user = (User) o;
-            return id == user.id &&
-                    Objects.equals(name, user.name);
+            return id == user.id && Objects.equals(name, user.name);
         }
 
         @Override
@@ -105,12 +109,14 @@ public class Analize {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             Info info = (Info) o;
-            return added == info.added &&
-                    changed == info.changed &&
-                    deleted == info.deleted;
+            return added == info.added && changed == info.changed && deleted == info.deleted;
         }
 
         @Override

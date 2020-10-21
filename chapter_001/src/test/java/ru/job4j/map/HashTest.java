@@ -37,7 +37,7 @@ public class HashTest {
         hash.insert(30, "Ivan");
         hash.delete(20);
         String result = hash.get(20);
-        assertThat(result, is(equalTo( null)));
+        assertThat(result, is(equalTo(null)));
     }
 
     @Test

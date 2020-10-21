@@ -15,9 +15,9 @@ public class Config {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 int index = line.replaceAll("\\\\s*(#[a-zA-Z1-9]*)", "").indexOf("=");
-                this.values.put(line.substring(0,index), line.substring(index + 1));
+                this.values.put(line.substring(0, index), line.substring(index + 1));
             }
-        } catch (FileNotFoundException fnfe){
+        } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         }
     }

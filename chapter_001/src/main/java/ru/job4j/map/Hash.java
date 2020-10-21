@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Hash<K, V> implements Iterable<V>{
+public class Hash<K, V> implements Iterable<V> {
 
     private Node[] hashtable = new Node[3];
     private Node<K, V> next;
@@ -64,7 +64,7 @@ public class Hash<K, V> implements Iterable<V>{
         this.hashtable = new Node[this.hashtable.length * 2];
         for (int index = 0; index != elements.length; index++) {
             if (elements[index] != null) {
-                this.hashtable[this.getIndex((K)elements[index].getKey())] = elements[index];
+                this.hashtable[this.getIndex((K) elements[index].getKey())] = elements[index];
             }
         }
     }
@@ -100,7 +100,7 @@ public class Hash<K, V> implements Iterable<V>{
 
             @Override
             public V next() {
-                if (modCount  != this.expectedModCount) {
+                if (modCount != this.expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
                 if (!hasNext()) {

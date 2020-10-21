@@ -13,6 +13,6 @@ public class FindFile {
 
         Files.walkFileTree(Paths.get(selectionArguments.directory()), mySimpleFileVisitor);
 
-        new WriteInFile().writeInFile(selectionArguments.writeInFileName(),mySimpleFileVisitor.getList());
+        new WriteInFile().writeInFile(selectionArguments.writeInFileName(), mySimpleFileVisitor.getList());
     }
 }

@@ -42,10 +42,10 @@ public class ImportDB {
 
     public void createDB() {
         try (Statement statement = this.connection.createStatement()) {
-            statement.execute("create table if not exists spam(" +
-                    "id serial primary key not null," +
-                    "name varchar(50) not null," +
-                    "email varchar(50) not null unique)");
+            statement.execute("create table if not exists spam("
+                    + "id serial primary key not null,"
+                    + "name varchar(50) not null,"
+                    + "email varchar(50) not null unique)");
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
