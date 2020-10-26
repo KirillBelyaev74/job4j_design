@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Tracker implements Store{
+public class Tracker implements Store {
     /**
      * Массив для хранение заявок.
      */
