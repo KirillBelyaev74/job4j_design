@@ -1,0 +1,41 @@
+create table company(
+    id   smallint not null,
+    name varchar(20),
+    constraint company_key primary key (id));
+
+create table person(
+    id         smallint not null,
+    name       varchar(20),
+    company_id smallint,
+    constraint person_key primary key (id));
+
+insert into company(id, name)values (1, initcap('google'));
+insert into company(id, name)values (2, initcap('amazon'));
+insert into company(id, name)values (3, initcap('apple'));
+insert into company(id, name)values (4, initcap('tesla'));
+insert into company(id, name)values (5, initcap('intel'));
+
+insert into person(id, name, company_id)VALUES (1, initcap('kirill'), 1);
+insert into person(id, name, company_id)VALUES (2, initcap('kostya'), 1);
+insert into person(id, name, company_id)VALUES (3, initcap('ivan'), 2);
+insert into person(id, name, company_id)VALUES (4, initcap('dmitriy'), 2);
+insert into person(id, name, company_id)VALUES (11, initcap('katya'), 2);
+insert into person(id, name, company_id)VALUES (5, initcap('petr'), 3);
+insert into person(id, name, company_id)VALUES (6, initcap('sergey'), 3);
+insert into person(id, name, company_id)VALUES (12, initcap('nelli'), 3);
+insert into person(id, name, company_id)VALUES (13, initcap('nastya'), 3);
+insert into person(id, name, company_id)VALUES (7, initcap('anton'), 4);
+insert into person(id, name, company_id)VALUES (8, initcap('denis'), 4);
+insert into person(id, name, company_id)VALUES (14, initcap('nelya'), 4);
+insert into person(id, name, company_id)VALUES (15, initcap('vera'), 4);
+insert into person(id, name, company_id)VALUES (16, initcap('irina'), 4);
+insert into person(id, name, company_id)VALUES (9, initcap('mikhail'), 5);
+insert into person(id, name, company_id)VALUES (10, initcap('nikita'), 5);
+
+select p.name as person_name, c.name company_name from person p
+    join company c on (c.id = p.company_id)
+where not c.id = 5 order by 2;
+
+select c.name as company_name, count(*) as count from company c
+    join person p on (c.id = p.company_id) group by c.name
+order by count(*) desc limit 1;
