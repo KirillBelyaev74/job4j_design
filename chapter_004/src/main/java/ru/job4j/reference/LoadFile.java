@@ -6,28 +6,28 @@ import java.util.*;
 
 public class LoadFile {
 
-    private Map<SoftReference<String>, String> hashMap = new HashMap<>();
+    private final Map<String, SoftReference<String>> hashMap = new HashMap<>();
 
-    public String textOfFile (String fileName) throws IOException {
+    public SoftReference<String> textOfFile (String fileName) throws IOException {
         if (fileName == null) {
             throw new NullPointerException();
         }
-        SoftReference<String> softReference = new SoftReference<>(fileName);
-        while ((this.hashMap.get(softReference)) == null) {
-            this.readFile(softReference);
+        SoftReference<String> result = this.hashMap.get(fileName);
+        if (result == null) {
+            this.readFile(fileName);
         }
-        return this.hashMap.get(softReference);
+        return this.hashMap.get(fileName);
     }
 
-    public void readFile (SoftReference<String> fileName) throws IOException {
+    public void readFile (String fileName) throws IOException {
         byte[] result = null;
-        try (InputStream inputStream = LoadFile.class.getClassLoader().getResourceAsStream(fileName.get())) {
+        try (InputStream inputStream = LoadFile.class.getClassLoader().getResourceAsStream(fileName)) {
             if (inputStream != null) {
                 try (BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream)) {
                     result = bufferedInputStream.readAllBytes();
                 }
             }
         }
-        this.hashMap.put(fileName, new String(Objects.requireNonNull(result)));
+        this.hashMap.put(fileName, new SoftReference<>(new String(result)));
     }
 }

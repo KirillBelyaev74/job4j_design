@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 
 public class LoadFileTest {
 
@@ -15,13 +16,15 @@ public class LoadFileTest {
     @Test
     public void whenNameFileThenNames() throws IOException {
         LoadFile loadFile = new LoadFile();
-        assertThat(loadFile.textOfFile("names.txt"), is("Kirill Belyaev" + System.lineSeparator() + "Petr Arsentiev"));
+        String expect = "Kirill Belyaev" + System.lineSeparator() + "Petr Arsentiev";
+        assertThat(loadFile.textOfFile("names.txt").get(), is(new SoftReference<>(expect).get()));
     }
 
     @Test
     public void whenNameFileThenAddress() throws IOException {
         LoadFile loadFile = new LoadFile();
-        assertThat(loadFile.textOfFile("address.txt"), is("Russia" + System.lineSeparator() + "USA"));
+        String expect = "Russia" + System.lineSeparator() + "USA";
+        assertThat(loadFile.textOfFile("address.txt").get(), is(new SoftReference<>(expect).get()));
     }
 
     @Test
@@ -29,7 +32,9 @@ public class LoadFileTest {
         LoadFile loadFile = new LoadFile();
         loadFile.textOfFile("names.txt");
         loadFile.textOfFile("address.txt");
-        assertThat(loadFile.textOfFile("names.txt"), is("Kirill Belyaev" + System.lineSeparator() + "Petr Arsentiev"));
-        assertThat(loadFile.textOfFile("address.txt"), is("Russia" + System.lineSeparator() + "USA"));
+        String expectNames = "Kirill Belyaev" + System.lineSeparator() + "Petr Arsentiev";
+        String expectAddress = "Russia" + System.lineSeparator() + "USA";
+        assertThat(loadFile.textOfFile("names.txt").get(), is(new SoftReference<>(expectNames).get()));
+        assertThat(loadFile.textOfFile("address.txt").get(), is(new SoftReference<>(expectAddress).get()));
     }
 }
