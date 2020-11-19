@@ -1,8 +1,7 @@
-package ru.job4j.tdd;
+package ru.job4j.tdd.cinema;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class Cinema3D implements Cinema {

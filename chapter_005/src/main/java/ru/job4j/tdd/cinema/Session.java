@@ -1,4 +1,4 @@
-package ru.job4j.tdd;
+package ru.job4j.tdd.cinema;
 
 import java.util.Calendar;
 import java.util.Map;
