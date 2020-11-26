@@ -17,7 +17,7 @@ public class GeneratorStringTest {
         assertThat(result, is("I am a Kirill Belyaev, Who are you?"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void whenTemplateThenNullPointerException() {
         Generator generator = new GeneratorString();
         Map<String, String> args = Map.of("surname", "Kirill Belyaev", "object", "you");
