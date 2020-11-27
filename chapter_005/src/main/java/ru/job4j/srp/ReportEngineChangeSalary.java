@@ -1,13 +1,14 @@
 package ru.job4j.srp;
+
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ReportEngine implements Report{
+public class ReportEngineChangeSalary implements Report {
 
-    private final Store store;
+    private Store store;
     private StringBuilder stringBuilder = new StringBuilder();
 
-    public ReportEngine(Store store) {
+    public ReportEngineChangeSalary(Store store) {
         this.store = store;
     }
 
@@ -20,7 +21,7 @@ public class ReportEngine implements Report{
                     .append(employee.getName()).append("; ")
                     .append(employee.getFired().getTime()).append("; ")
                     .append(employee.getHired().getTime()).append("; ")
-                    .append(employee.getSalary()).append(";")
+                    .append(employee.getSalary() / 70).append(";")
                     .append(System.lineSeparator());
         }
         return this.stringBuilder != null;

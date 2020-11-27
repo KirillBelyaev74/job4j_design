@@ -18,7 +18,6 @@ public class ReportEngineTest {
     private final MemStore store = new MemStore();
     private final Calendar now = Calendar.getInstance();
     private final Employee worker = new Employee("Ivan", now, now, 100);
-    private final ReportEngine engine = new ReportEngine(store);
 
     @Before
     public void start() {
@@ -27,6 +26,8 @@ public class ReportEngineTest {
 
     @Test
     public void whenOldGenerated() {
+        ReportEngine report = new ReportEngine(this.store);
+
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
@@ -36,11 +37,13 @@ public class ReportEngineTest {
                 .append(this.worker.getSalary()).append(";")
                 .append(System.lineSeparator());
 
-        assertThat(this.engine.generate(em -> true), is(expect.toString()));
+        report.reportFormat(em -> true);
+        assertThat(report.getString(), is(expect.toString()));
     }
 
     @Test
     public void whenOldGeneratedChangeSalary() {
+        ReportEngineChangeSalary report = new ReportEngineChangeSalary(this.store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
@@ -50,14 +53,15 @@ public class ReportEngineTest {
                 .append(this.worker.getSalary() / 70).append(";")
                 .append(System.lineSeparator());
 
-        assertThat(this.engine.generateChangeSalary(em -> true), is(expect.toString()));
+        report.reportFormat(em -> true);
+        assertThat(report.getString(), is(expect.toString()));
     }
 
     @Test
     public void whenGenerateToHtml() throws IOException {
-        Report reportInTheFormat = new ReportInTheFormatHtml(this.store);
-        String employeesString = reportInTheFormat.reportFormat(em -> true);
-        new OutputString(employeesString).write("report.html");
+        ReportInTheFormatHtml report = new ReportInTheFormatHtml(this.store);
+        report.reportFormat(e -> true);
+        new OutputString(report.getString()).write("report.html");
 
         StringBuilder expect = new StringBuilder()
                 .append("<html>")
@@ -80,9 +84,9 @@ public class ReportEngineTest {
 
     @Test
     public void whenGenerateToXml() throws IOException {
-        ReportInTheFormatXml reportInTheFormat = new ReportInTheFormatXml(this.store);
-        Document document = reportInTheFormat.reportFormat(e -> true);
-        new OutputXml(document).write("report.xml");
+        ReportInTheFormatXml report = new ReportInTheFormatXml(this.store);
+        report.reportFormat(e -> true);
+        new OutputXml(report.getDocument()).write("report.xml");
 
         StringBuilder stringBuilder = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
@@ -107,9 +111,9 @@ public class ReportEngineTest {
 
     @Test
     public void whenGenerateToJson() throws IOException {
-        ReportInTheFormatJson reportInTheFormatJson = new ReportInTheFormatJson(this.store);
-        JSONObject jsonObject = reportInTheFormatJson.reportFormat(e -> true);
-        new OutputString(jsonObject.toJSONString()).write("report.json");
+        ReportInTheFormatJson report = new ReportInTheFormatJson(this.store);
+        report.reportFormat(e -> true);
+        new OutputString(report.getJsonObject().toJSONString()).write("report.json");
 
         StringBuilder stringBuilder = new StringBuilder()
                 .append("{\\\"employee\\\":")

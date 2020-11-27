@@ -5,7 +5,7 @@ import javax.xml.parsers.*;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ReportInTheFormatXml {
+public class ReportInTheFormatXml implements Report{
 
     private Store store;
     private Document document;
@@ -24,7 +24,7 @@ public class ReportInTheFormatXml {
         }
     }
 
-    public Document reportFormat(Predicate<Employee> predicate) {
+    public boolean reportFormat(Predicate<Employee> predicate) {
 
         this.createDocument();
 
@@ -46,6 +46,10 @@ public class ReportInTheFormatXml {
             elementFired.setTextContent(employee.getFired().getTime().toString());
             elementSalary.setTextContent(String.valueOf(employee.getSalary()));
         }
+        return this.document != null;
+    }
+
+    public Document getDocument() {
         return this.document;
     }
 }
