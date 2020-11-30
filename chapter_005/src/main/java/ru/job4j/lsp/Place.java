@@ -2,7 +2,8 @@ package ru.job4j.lsp;
 
 import java.util.List;
 
-interface Place {
+interface Storage {
     void add(Food food);
-    List<Food> getFoods();
+    boolean accept(Food food);
+    List<Food> clear();
 }

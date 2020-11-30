@@ -3,7 +3,7 @@ package ru.job4j.lsp;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Trash implements Place {
+public class Trash implements Storage {
 
     private List<Food> foods = new LinkedList<>();
 
@@ -13,7 +13,21 @@ public class Trash implements Place {
     }
 
     @Override
-    public List<Food> getFoods() {
-        return this.foods;
+    public boolean accept(Food food) {
+        double lived = System.currentTimeMillis() - food.getCreateDate().getTimeInMillis();
+        double life = food.getExpiryDate().getTimeInMillis() - food.getCreateDate().getTimeInMillis();
+        boolean result = false;
+        if (lived / life * 100 > 100) {
+            this.foods.add(food);
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public List<Food> clear() {
+        List<Food> food = new LinkedList<>(this.foods);
+        this.foods.clear();
+        return food;
     }
 }
