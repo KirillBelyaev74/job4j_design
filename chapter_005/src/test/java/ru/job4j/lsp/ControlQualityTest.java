@@ -1,7 +1,6 @@
 package ru.job4j.lsp;
 
 import org.junit.Test;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import static org.hamcrest.core.Is.is;
@@ -9,10 +8,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class ControlQualityTest {
-
-    private final Calendar calendarOne = new GregorianCalendar(2020, 10, 20);
-    private final Calendar calendarTwo = new GregorianCalendar(2020, 10, 30);
-    private final Calendar calendarThree = new GregorianCalendar(2020, 10, 25);
 
     @Test
     public void whenDiscountOnPrice() {
