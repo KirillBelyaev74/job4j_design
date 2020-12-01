@@ -17,11 +17,17 @@ public class ParkingForTransport implements Parking {
     private final Map<Integer, Transport> parking = new HashMap<>(this.totalNumberPlace);
 
     /**
+     * Добавление транспорта на парковку
+     * @param transport - транспорт который заезжает на парковку
+     */
+    public void add(Transport transport) {
+    }
+
+    /**
      * Распределение мест на парковке
-     * @param transport - транспорт заезжающий на парковку
      */
     @Override
-    public void distribution(Transport transport) {
+    public void distribution() {
     }
 
     /**

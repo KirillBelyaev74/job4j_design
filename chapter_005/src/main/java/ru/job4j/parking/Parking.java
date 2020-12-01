@@ -3,10 +3,15 @@ package ru.job4j.parking;
 public interface Parking {
 
     /**
-     * Распределение мест на парковке
-     * @param transport - транспорт заезжающий на парковку
+     * Добавление транспорта на парковку
+     * @param transport - транспорт который заезжает на парковку
      */
-    void distribution(Transport transport);
+    void add(Transport transport);
+
+    /**
+     * Распределение мест на парковке
+     */
+    void distribution();
 
     /**
      * @param transport - место которое освобождается
