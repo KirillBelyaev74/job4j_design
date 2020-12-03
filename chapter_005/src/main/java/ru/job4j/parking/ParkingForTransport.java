@@ -13,14 +13,20 @@ public class ParkingForTransport implements Parking {
      * totalNumberPlace - общее количество мест
      * transports - парковка<номер места парковки, транспорт>
      */
-    private int totalNumberPlace = 20;
-    private final Map<Integer, Transport> parking = new HashMap<>(this.totalNumberPlace);
+    private int valueCar;
+    private int valueTruck;
+    private final Map<Integer, Transport> parkingCar = new HashMap<>(this.valueCar);
+    private final Map<Integer, Transport> parkingTruck = new HashMap<>(this.valueTruck);
 
+    public ParkingForTransport(int valueCar, int valueTruck) {
+        this.valueCar = valueCar;
+        this.valueTruck = valueTruck;
+    }
     /**
      * Добавление транспорта на парковку
      * @param transport - транспорт который заезжает на парковку
      */
-    public void add(Transport transport) {
+    public boolean add(Transport transport) {
     }
 
     /**

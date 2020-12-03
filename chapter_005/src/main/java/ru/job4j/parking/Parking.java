@@ -6,7 +6,7 @@ public interface Parking {
      * Добавление транспорта на парковку
      * @param transport - транспорт который заезжает на парковку
      */
-    void add(Transport transport);
+    boolean add(Transport transport);
 
     /**
      * Распределение мест на парковке
