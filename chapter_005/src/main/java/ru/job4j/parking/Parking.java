@@ -1,5 +1,7 @@
 package ru.job4j.parking;
 
+import java.util.Map;
+
 public interface Parking {
 
     /**
@@ -20,8 +22,20 @@ public interface Parking {
     Transport delete(Transport transport);
 
     /**
+     * Возвращает все паковочные места для легковых машин
+     * @return - парковочные места для легковых машин
+     */
+    Map<Integer, Transport> getParkingCar();
+
+    /**
+     * Возвращает все парковочные места для грузовых машин
+     * @return - парковочные места для грущовых машин
+     */
+    Map<Integer, Truck> getParkingTruck();
+
+    /**
      * Генерирует случайное число(имитирует выбранное парковочное место вадителем)
      * @return - возврощает случайное число(выбраное место вадителем)
      */
-    int getRandomInt();
+    int getRandomInt(int numberPlace);
 }

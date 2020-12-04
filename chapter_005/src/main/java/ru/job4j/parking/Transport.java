@@ -7,16 +7,17 @@ public class Transport {
 
     /**
      * name - Название транспорта
-     * placeBusy - Количство мест занимаемое транспортом
+     * numberTransport - номер машины
+     * placeBusyCar - количество мест занимемым места на парковке для легковых машин
      */
     private String name;
     private String numberTransport;
-    private int placeBusy;
+    private int placeBusyCar;
 
     public Transport(String name, String numberTransport, int placeBusy) {
         this.name = name;
         this.numberTransport = numberTransport;
-        this.placeBusy = placeBusy;
+        this.placeBusyCar = placeBusy;
     }
 
     public String getName() {
@@ -35,11 +36,11 @@ public class Transport {
         this.numberTransport = numberTransport;
     }
 
-    public int getPlaceBusy() {
-        return placeBusy;
+    public int getPlaceBusyCar() {
+        return placeBusyCar;
     }
 
-    public void setPlaceBusy(int placeBusy) {
-        this.placeBusy = placeBusy;
+    public void setPlaceBusyCar(int placeBusyCar) {
+        this.placeBusyCar = placeBusyCar;
     }
 }
