@@ -18,7 +18,6 @@ public class Trash implements Storage {
         double life = food.getExpiryDate().getTimeInMillis() - food.getCreateDate().getTimeInMillis();
         boolean result = false;
         if (lived / life * 100 > 100) {
-            this.foods.add(food);
             result = true;
         }
         return result;

@@ -19,12 +19,10 @@ public class Shop implements Storage {
         double shelfLife = lived / life * 100;
         boolean result = false;
         if (25 < shelfLife && shelfLife < 75) {
-            this.foods.add(food);
             result = true;
         } else if (75 < shelfLife) {
             double discount = food.getPrice() * (food.getDiscount() / 100D);
             food.setPrice(food.getPrice() - discount);
-            this.foods.add(food);
             result = true;
         }
         return result;

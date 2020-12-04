@@ -1,6 +1,6 @@
 package ru.job4j.lsp;
 
-import java.util.List;
+import java.util.*;
 
 public class ControlQuality {
 
@@ -16,5 +16,20 @@ public class ControlQuality {
                 storage.add(food);
             }
         }
+    }
+
+    public boolean resort() {
+        boolean result = false;
+        List<Food> foods = new LinkedList<>();
+        for(Storage storage : this.storages) {
+            foods.addAll(storage.clear());
+        }
+        if(foods != null) {
+            for (Food food : foods) {
+                this.distribution(food);
+            }
+            result = true;
+        }
+        return result;
     }
 }

@@ -17,7 +17,6 @@ public class Warehouse implements Storage {
         double life = food.getExpiryDate().getTimeInMillis() - food.getCreateDate().getTimeInMillis();
         boolean result = false;
         if (lived / life * 100 < 25) {
-            this.foods.add(food);
             result = true;
         }
         return result;

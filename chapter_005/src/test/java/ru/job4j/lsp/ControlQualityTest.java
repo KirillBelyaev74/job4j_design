@@ -62,4 +62,23 @@ public class ControlQualityTest {
         controlQuality.distribution(chocolate);
         assertNotNull(shop.clear());
     }
+
+    @Test
+    public void whenFoodForShopAndResort() {
+        Food chocolate = new Food(
+                "Chocolate"
+                , new GregorianCalendar(2020, 11, 1)
+                , new GregorianCalendar(2020, 11, 10)
+                , 70, 10);
+
+        Storage warehouse = new Warehouse();
+        Storage shop = new Shop();
+        Storage trash = new Trash();
+        List<Storage> storages = List.of(warehouse, shop, trash);
+
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.distribution(chocolate);
+        controlQuality.resort();
+        assertNotNull(shop.clear());
+    }
 }
