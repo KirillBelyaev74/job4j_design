@@ -1,34 +1,34 @@
 package ru.job4j.isp;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public interface Item<E> {
+public interface Item<Menu> {
 
-    void add(E menu);
+    boolean add(Menu child, Menu parent);
+    Optional<Node<Menu>> findBy(Menu parent);
 
-    class Node<E> {
+    class Node<Menu> {
 
-        private E menu;
-        private List<E> menuChildren = new LinkedList<>();
+        private Menu menu;
+        private List<Node<Menu>> menuChildren = new LinkedList<>();
 
-        public Node(E menu) {
+        public Node(Menu menu) {
             this.menu = menu;
         }
 
-        public E getMenu() {
+        public Menu getMenu() {
             return menu;
         }
 
-        public void setMenu(E menu) {
+        public void setMenu(Menu menu) {
             this.menu = menu;
         }
 
-        public List<E> getMenuChildren() {
+        public List<Node<Menu>> getMenuChildren() {
             return menuChildren;
         }
 
-        public void setMenuChildren(List<E> menuChildren) {
+        public void setMenuChildren(List<Node<Menu>> menuChildren) {
             this.menuChildren = menuChildren;
         }
     }
