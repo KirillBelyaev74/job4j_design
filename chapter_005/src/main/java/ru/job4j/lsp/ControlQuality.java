@@ -21,14 +21,14 @@ public class ControlQuality {
     public boolean resort() {
         boolean result = false;
         List<Food> foods = new LinkedList<>();
-        for(Storage storage : this.storages) {
+        for (Storage storage : this.storages) {
             foods.addAll(storage.clear());
         }
-        if(foods != null) {
+        if (!foods.isEmpty()) {
+            result = true;
             for (Food food : foods) {
                 this.distribution(food);
             }
-            result = true;
         }
         return result;
     }
