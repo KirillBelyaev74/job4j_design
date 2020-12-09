@@ -4,8 +4,10 @@ import java.util.*;
 
 public interface Item<Menu> {
 
-    boolean add(Menu child, Menu parent);
+    boolean addParent(Menu menu);
+    boolean addChild(Menu child, Menu parent);
     Optional<Node<Menu>> findBy(Menu parent);
+    void printMenu();
 
     class Node<Menu> {
 
