@@ -5,7 +5,7 @@ package ru.job4j.parking;
  */
 public class Car extends Transport{
 
-    public Car(String name, String numberTransport, int placeBusyCar) {
+    public Car(String name, String numberTransport) {
         super(name, numberTransport, 1);
     }
 }

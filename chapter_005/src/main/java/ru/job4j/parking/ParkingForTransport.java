@@ -46,19 +46,19 @@ public class ParkingForTransport implements Parking {
     }
 
     /**
-     * Возвращает все паковочные места для легковых машин
+     * Возвращает количество занятых паковочных мест для легковых машин
      * @return - парковочные места для легковых машин
      */
-    public Map<Integer, Transport> getParkingCar() {
-        return this.parkingCar;
+    public int getParkingCar() {
+        return this.parkingCar.size();
     }
 
     /**
-     * Возвращает все парковочные места для грузовых машин
+     * Возвращает количество занятых парковочных мест для грузовых машин
      * @return - парковочные места для грущовых машин
      */
-    public Map<Integer, Truck> getParkingTruck() {
-        return this.parkingTruck;
+    public int getParkingTruck() {
+        return this.parkingTruck.size();
     }
 
     /**

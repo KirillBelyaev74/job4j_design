@@ -25,13 +25,13 @@ public interface Parking {
      * Возвращает все паковочные места для легковых машин
      * @return - парковочные места для легковых машин
      */
-    Map<Integer, Transport> getParkingCar();
+    int getVolumeCar();
 
     /**
      * Возвращает все парковочные места для грузовых машин
      * @return - парковочные места для грущовых машин
      */
-    Map<Integer, Truck> getParkingTruck();
+    int getVolumeTruck();
 
     /**
      * Генерирует случайное число(имитирует выбранное парковочное место вадителем)
