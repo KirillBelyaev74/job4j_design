@@ -1,7 +1,5 @@
 package ru.job4j.parking;
 
-import java.util.Map;
-
 public interface Parking {
 
     /**
@@ -11,31 +9,14 @@ public interface Parking {
     boolean add(Transport transport);
 
     /**
-     * Распределение мест на парковке
-     */
-    void distribution();
-
-    /**
      * @param transport - место которое освобождается
      * @return - транспорт, который уезжает
      */
     Transport delete(Transport transport);
 
     /**
-     * Возвращает все паковочные места для легковых машин
+     * Возвращает все паковочные места для транспорта
      * @return - парковочные места для легковых машин
      */
-    int getVolumeCar();
-
-    /**
-     * Возвращает все парковочные места для грузовых машин
-     * @return - парковочные места для грущовых машин
-     */
-    int getVolumeTruck();
-
-    /**
-     * Генерирует случайное число(имитирует выбранное парковочное место вадителем)
-     * @return - возврощает случайное число(выбраное место вадителем)
-     */
-    int getRandomInt(int numberPlace);
+    int getVolumeTransport();
 }

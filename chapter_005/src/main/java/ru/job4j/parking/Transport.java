@@ -8,7 +8,7 @@ public class Transport {
     /**
      * name - Название транспорта
      * numberTransport - номер машины
-     * placeBusyCar - количество мест занимемым места на парковке для легковых машин
+     * placeBusyCar - количество мест занимемым места на парковке для транспорта
      */
     private String name;
     private String numberTransport;

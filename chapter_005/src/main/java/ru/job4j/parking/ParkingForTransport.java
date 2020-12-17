@@ -8,33 +8,35 @@ import java.util.*;
 public class ParkingForTransport implements Parking {
 
     /**
-     * valueCar - общее количество мест для легковых машин
-     * valueTruck - общее количество мест для грузавых машин
-     * parkingCar - парковка<номер места парковки, легковые машины>
-     * parkingTruck - парковка<номер места парковки, грузовые машины>
+     * valueTransport - общее количество мест для транспорта
+     * parkingTransport - парковка<номер места парковки, транспорт>
+     * numberParking - количество занятых мест
      */
-    private int valueCar;
-    private int valueTruck;
-    private final Map<Integer, Transport> parkingCar = new HashMap<>(this.valueCar);
-    private final Map<Integer, Truck> parkingTruck = new HashMap<>(this.valueTruck);
+    private int valueParking;
+    private final Map<Integer, Transport> parkingTransport = new HashMap<>(this.valueParking);
+    private int numberParking = 1;
 
-    public ParkingForTransport(int valueCar, int valueTruck) {
-        this.valueCar = valueCar;
-        this.valueTruck = valueTruck;
+    public ParkingForTransport(int valueTransport) {
+        this.valueParking = valueTransport;
     }
     /**
      * Добавление транспорта на парковку
      * @param transport - транспорт который заезжает на парковку
      */
     public boolean add(Transport transport) {
-        return false;
-    }
-
-    /**
-     * Распределение мест на парковке
-     */
-    @Override
-    public void distribution() {
+        if(transport == null) {
+            throw new NullPointerException();
+        }
+        if(transport.getPlaceBusyCar() > this.valueParking - this.parkingTransport.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if(this.parkingTransport.containsValue(transport)) {
+            throw new IllegalArgumentException();
+        }
+        for(int index = 0; index != transport.getPlaceBusyCar(); index++) {
+            this.parkingTransport.put(this.numberParking++, transport);
+        }
+        return this.parkingTransport.containsValue(transport);
     }
 
     /**
@@ -42,31 +44,24 @@ public class ParkingForTransport implements Parking {
      * @return - транспорт, который уезжает
      */
     public Transport delete(Transport transport) {
-        return null;
+        if(!this.parkingTransport.containsValue(transport)) {
+            throw new IllegalArgumentException();
+        }
+        for(int index = 1; index != this.numberParking; index++) {
+            Transport transportParking = this.parkingTransport.get(index);
+            if (transportParking != null &&
+                    transportParking.getNumberTransport().equalsIgnoreCase(transport.getNumberTransport())) {
+                this.parkingTransport.remove(index);
+            }
+        }
+        return transport;
     }
 
     /**
-     * Возвращает количество занятых паковочных мест для легковых машин
+     * Возвращает количество занятых паковочных мест для транспорта
      * @return - парковочные места для легковых машин
      */
-    public int getParkingCar() {
-        return this.parkingCar.size();
-    }
-
-    /**
-     * Возвращает количество занятых парковочных мест для грузовых машин
-     * @return - парковочные места для грущовых машин
-     */
-    public int getParkingTruck() {
-        return this.parkingTruck.size();
-    }
-
-    /**
-     * Генерирует случайное число(имитирует выбранное парковочное место вадителем)
-     * @return - возврощает случайное число(выбраное место вадителем)
-     */
-    @Override
-    public int getRandomInt(int numberPlace) {
-        return new Random().nextInt(numberPlace);
+    public int getVolumeTransport() {
+        return this.parkingTransport.size();
     }
 }
