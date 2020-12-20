@@ -12,12 +12,12 @@ public class Transport {
      */
     private String name;
     private String numberTransport;
-    private int placeBusyCar;
+    private int placeBusyTransport;
 
     public Transport(String name, String numberTransport, int placeBusy) {
         this.name = name;
         this.numberTransport = numberTransport;
-        this.placeBusyCar = placeBusy;
+        this.placeBusyTransport = placeBusy;
     }
 
     public String getName() {
@@ -36,11 +36,11 @@ public class Transport {
         this.numberTransport = numberTransport;
     }
 
-    public int getPlaceBusyCar() {
-        return placeBusyCar;
+    public int getPlaceBusyTransport() {
+        return placeBusyTransport;
     }
 
-    public void setPlaceBusyCar(int placeBusyCar) {
-        this.placeBusyCar = placeBusyCar;
+    public void setPlaceBusyTransport(int placeBusyTransport) {
+        this.placeBusyTransport = placeBusyTransport;
     }
 }

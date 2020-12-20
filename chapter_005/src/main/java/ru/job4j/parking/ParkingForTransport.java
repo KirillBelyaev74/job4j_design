@@ -8,35 +8,56 @@ import java.util.*;
 public class ParkingForTransport implements Parking {
 
     /**
-     * valueTransport - общее количество мест для транспорта
-     * parkingTransport - парковка<номер места парковки, транспорт>
-     * numberParking - количество занятых мест
+     * valueParkingCar - общее количество мест для легковых машин
+     * valueParkingTruck - общее количество мест для грузовых машин
+     * parkingCar - парковка для легковых машин
+     * parkingTruck - парковка для грузовых машин
      */
-    private int valueParking;
-    private final Map<Integer, Transport> parkingTransport = new HashMap<>(this.valueParking);
-    private int numberParking = 1;
+    private int valueParkingCar;
+    private int valueParkingTruck;
+    private final List<Transport> parkingCar = new ArrayList<>(this.valueParkingCar);
+    private final List<Transport> parkingTruck = new ArrayList<>(this.valueParkingTruck);
 
-    public ParkingForTransport(int valueTransport) {
-        this.valueParking = valueTransport;
+    public ParkingForTransport(int valueParkingCar, int valueParkingTruck) {
+        this.valueParkingCar = valueParkingCar;
+        this.valueParkingTruck = valueParkingTruck;
     }
     /**
      * Добавление транспорта на парковку
      * @param transport - транспорт который заезжает на парковку
      */
     public boolean add(Transport transport) {
-        if(transport == null) {
+        this.validate(transport);
+        boolean result = false;
+        int placeBusyTransport = transport.getPlaceBusyTransport();
+        if(placeBusyTransport > 1
+                && this.valueParkingTruck == this.parkingTruck.size()
+                && placeBusyTransport <= this.valueParkingCar - this.parkingCar.size()) {
+            for(int index = 0; index != placeBusyTransport; index++) {
+                this.parkingCar.add(transport);
+            }
+            result = true;
+        } else if (placeBusyTransport > 1) {
+            this.parkingTruck.add(transport);
+            result = true;
+        } else {
+            this.parkingCar.add(transport);
+            result = true;
+        }
+        return result;
+    }
+
+    public void validate(Transport transport) {
+        if (transport == null) {
             throw new NullPointerException();
         }
-        if(transport.getPlaceBusyCar() > this.valueParking - this.parkingTransport.size()) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-        if(this.parkingTransport.containsValue(transport)) {
+        if (this.parkingCar.contains(transport)) {
             throw new IllegalArgumentException();
         }
-        for(int index = 0; index != transport.getPlaceBusyCar(); index++) {
-            this.parkingTransport.put(this.numberParking++, transport);
+        if (this.valueParkingCar == this.parkingCar.size()
+                && this.valueParkingTruck == this.parkingTruck.size()) {
+            throw new ArrayIndexOutOfBoundsException();
         }
-        return this.parkingTransport.containsValue(transport);
     }
 
     /**
@@ -44,24 +65,35 @@ public class ParkingForTransport implements Parking {
      * @return - транспорт, который уезжает
      */
     public Transport delete(Transport transport) {
-        if(!this.parkingTransport.containsValue(transport)) {
+        if(!this.parkingCar.contains(transport) && !this.parkingTruck.contains(transport)) {
             throw new IllegalArgumentException();
         }
-        for(int index = 1; index != this.numberParking; index++) {
-            Transport transportParking = this.parkingTransport.get(index);
-            if (transportParking != null &&
-                    transportParking.getNumberTransport().equalsIgnoreCase(transport.getNumberTransport())) {
-                this.parkingTransport.remove(index);
+        int placeBusyTransport = transport.getPlaceBusyTransport();
+        if (placeBusyTransport > 1 && this.parkingCar.contains(transport)) {
+            for (int index = 0; index != placeBusyTransport; index++) {
+                this.parkingCar.remove(transport);
             }
+        } else if (placeBusyTransport > 1) {
+            this.parkingTruck.remove(transport);
+        } else {
+            this.parkingCar.remove(transport);
         }
         return transport;
     }
 
     /**
-     * Возвращает количество занятых паковочных мест для транспорта
+     * Возвращает количество занятых паковочных мест для легковых машин
      * @return - парковочные места для легковых машин
      */
-    public int getVolumeTransport() {
-        return this.parkingTransport.size();
+    public int getVolumeCar() {
+        return this.parkingCar.size();
+    }
+
+    /**
+     * Возвращает количество занятых паковочных мест для грузовых машин
+     * @return - парковочные места для легковых машин
+     */
+    public int getVolumeTruck() {
+        return this.parkingTruck.size();
     }
 }

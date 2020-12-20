@@ -15,8 +15,14 @@ public interface Parking {
     Transport delete(Transport transport);
 
     /**
-     * Возвращает все паковочные места для транспорта
+     * Возвращает все паковочные места для легковых машин
      * @return - парковочные места для легковых машин
      */
-    int getVolumeTransport();
+    int getVolumeCar();
+
+    /**
+     * Возвращает количество занятых паковочных мест для грузовых машин
+     * @return - парковочные места для легковых машин
+     */
+    int getVolumeTruck();
 }

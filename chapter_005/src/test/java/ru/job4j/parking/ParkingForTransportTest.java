@@ -13,10 +13,11 @@ public class ParkingForTransportTest {
     public void whenTransportItsPlace() {
         Transport car = new Car("Car", "1a");
         Transport truck = new Truck("Truck", "2b", 3);
-        Parking parking = new ParkingForTransport(5);
+        Parking parking = new ParkingForTransport(2, 2);
         parking.add(car);
         parking.add(truck);
-        assertThat(parking.getVolumeTransport(), is(4));
+        assertThat(parking.getVolumeCar(), is(1));
+        assertThat(parking.getVolumeTruck(), is(1));
     }
 
     /**
@@ -26,12 +27,13 @@ public class ParkingForTransportTest {
     public void whenTransportExit() {
         Transport car = new Car("Car", "1a");
         Transport truck = new Truck("Truck", "2b", 3);
-        Parking parking = new ParkingForTransport(5);
+        Parking parking = new ParkingForTransport(2, 2);
         parking.add(car);
         parking.add(truck);
         assertThat(parking.delete(car), is(car));
         assertThat(parking.delete(truck), is(truck));
-        assertThat(parking.getVolumeTransport(), is(0));
+        assertThat(parking.getVolumeCar(), is(0));
+        assertThat(parking.getVolumeTruck(), is(0));
 
     }
 
@@ -45,12 +47,31 @@ public class ParkingForTransportTest {
         Transport truckOne = new Truck("Truck", "2b", 3);
         Transport truckTwo = new Truck("Truck", "3c", 2);
         Transport truckThree = new Truck("Truck", "4d", 3);
-        Parking parking = new ParkingForTransport(10);
+        Parking parking = new ParkingForTransport(5, 2);
         parking.add(car);
         parking.add(truckOne);
         parking.add(truckTwo);
         parking.add(truckThree);
-        assertThat(parking.getVolumeTransport(), is(9));
+        assertThat(parking.getVolumeCar(), is(4));
+    }
+
+    /**
+     * Когда места для грузовых машин заполняются и
+     * грузовые машины паркуются на парковке для легковых машин и уезжают
+     */
+    @Test
+    public void whenTransportTakesPlaceCarAndExit() {
+        Transport car = new Car("Car", "1a");
+        Transport truckOne = new Truck("Truck", "2b", 3);
+        Transport truckTwo = new Truck("Truck", "3c", 2);
+        Transport truckThree = new Truck("Truck", "4d", 3);
+        Parking parking = new ParkingForTransport(5, 2);
+        parking.add(car);
+        parking.add(truckOne);
+        parking.add(truckTwo);
+        parking.add(truckThree);
+        parking.delete(truckThree);
+        assertThat(parking.getVolumeCar(), is(1));
     }
 
     /**
@@ -63,7 +84,7 @@ public class ParkingForTransportTest {
         Transport truckTwo = new Truck("Truck", "3c", 2);
         Transport truckThree = new Truck("Truck", "4d", 3);
         Transport carTwo = new Car("Car", "5f");
-        Parking parking = new ParkingForTransport(4);
+        Parking parking = new ParkingForTransport(4, 2);
         parking.add(One);
         parking.add(truckOne);
         parking.add(truckTwo);
