@@ -12,14 +12,16 @@ public class LoadFile {
         if (fileName == null) {
             throw new NullPointerException();
         }
-        SoftReference<String> result = this.hashMap.get(fileName);
-        if (result == null) {
-            this.readFile(fileName);
+        SoftReference<String> result;
+        if (this.hashMap.containsKey(fileName)) {
+             result = this.hashMap.get(fileName);
+        } else {
+            result = this.readFile(fileName);
         }
-        return this.hashMap.get(fileName);
+        return Objects.requireNonNull(result);
     }
 
-    public void readFile (String fileName) throws IOException {
+    public SoftReference<String> readFile (String fileName) throws IOException {
         byte[] result = null;
         try (InputStream inputStream = LoadFile.class.getClassLoader().getResourceAsStream(fileName)) {
             if (inputStream != null) {
@@ -28,6 +30,11 @@ public class LoadFile {
                 }
             }
         }
-        this.hashMap.put(fileName, new SoftReference<>(new String(result)));
+        if (result == null) {
+            throw new NullPointerException();
+        }
+        SoftReference<String> softReference = new SoftReference<>(new String(result));
+        this.hashMap.put(fileName, softReference);
+        return softReference;
     }
 }
