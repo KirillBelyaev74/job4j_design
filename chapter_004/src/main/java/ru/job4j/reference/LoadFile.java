@@ -8,17 +8,15 @@ public class LoadFile {
 
     private final Map<String, SoftReference<String>> hashMap = new HashMap<>();
 
-    public SoftReference<String> textOfFile (String fileName) throws IOException {
+    public String textOfFile (String fileName) throws IOException {
         if (fileName == null) {
             throw new NullPointerException();
         }
-        SoftReference<String> result;
-        if (this.hashMap.containsKey(fileName)) {
-             result = this.hashMap.get(fileName);
-        } else {
-            result = this.readFile(fileName);
+        String result;
+        if ((result = this.hashMap.get(fileName).get()) == null) {
+            result = this.readFile(fileName).get();
         }
-        return Objects.requireNonNull(result);
+        return result;
     }
 
     public SoftReference<String> readFile (String fileName) throws IOException {
