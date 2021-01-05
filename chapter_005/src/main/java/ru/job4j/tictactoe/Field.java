@@ -63,7 +63,7 @@ public class Field {
                     break;
                 }
             }
-            if(result) {
+            if (result) {
                 break;
             }
         }
@@ -95,10 +95,10 @@ public class Field {
         this.fill();
         this.print();
         while (result) {
-            for(int index = 0; index != this.consoles.size() && index != this.marks.size(); index++) {
+            for (int index = 0; index != this.consoles.size() && index != this.marks.size(); index++) {
                 this.stepPerson(this.marks.get(index), this.consoles.get(index));
                 this.print();
-                if(this.validateWin.validate(this.field)) {
+                if (this.validateWin.validate(this.field)) {
                     result = false;
                     break;
                 }

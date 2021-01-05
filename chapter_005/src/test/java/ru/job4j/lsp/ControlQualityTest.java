@@ -12,10 +12,10 @@ public class ControlQualityTest {
     @Test
     public void whenDiscountOnPrice() {
         Food milk = new Food(
-                "Milk"
-                , new GregorianCalendar(2020, 10, 25)
-                , new GregorianCalendar(2020, 11, 2)
-                , 50, 10);
+                "Milk",
+                new GregorianCalendar(2020, 10, 25),
+                new GregorianCalendar(2020, 11, 2),
+                50, 10);
 
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -30,10 +30,10 @@ public class ControlQualityTest {
     @Test
     public void whenFoodExpiredStoragePeriod() {
         Food cheese = new Food(
-                "Cheese"
-                , new GregorianCalendar(2020, 10, 20)
-                , new GregorianCalendar(2020, 10, 29)
-                , 100, 20);
+                "Cheese",
+                new GregorianCalendar(2020, 10, 20),
+                new GregorianCalendar(2020, 10, 29),
+                100, 20);
 
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -48,10 +48,10 @@ public class ControlQualityTest {
     @Test
     public void whenFoodForShop() {
         Food chocolate = new Food(
-            "Cheese"
-            , new GregorianCalendar(2020, 10, 25)
-            , new GregorianCalendar(2020, 11, 5)
-            , 70, 10);
+            "Cheese",
+            new GregorianCalendar(2020, 10, 25),
+            new GregorianCalendar(2020, 11, 5),
+            70, 10);
 
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -66,10 +66,10 @@ public class ControlQualityTest {
     @Test
     public void whenFoodForShopAndResort() {
         Food chocolate = new Food(
-                "Chocolate"
-                , new GregorianCalendar(2020, 11, 1)
-                , new GregorianCalendar(2020, 11, 10)
-                , 70, 10);
+                "Chocolate",
+                new GregorianCalendar(2020, 11, 1),
+                new GregorianCalendar(2020, 11, 10),
+                70, 10);
 
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();

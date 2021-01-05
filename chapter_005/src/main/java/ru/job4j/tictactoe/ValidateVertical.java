@@ -19,7 +19,7 @@ public class ValidateVertical implements Validate {
                     index++;
                 }
             }
-            if(index == field.length) {
+            if (index == field.length) {
                 break;
             }
         }

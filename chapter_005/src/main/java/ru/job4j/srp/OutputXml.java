@@ -10,7 +10,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-public class OutputXml implements Output{
+public class OutputXml implements Output {
 
     public final Document document;
 

@@ -13,7 +13,7 @@ public class MaxMin {
         return this.findValue(value, comparator);
     }
 
-    public <T> T findValue (List<T> value, Comparator<T> comparator) {
+    public <T> T findValue(List<T> value, Comparator<T> comparator) {
         T result = value.get(0);
         int index = 1;
         while (index != (value.size())) {

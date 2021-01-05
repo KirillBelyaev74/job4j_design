@@ -15,7 +15,7 @@ public class ValidateDiagonalOne implements Validate {
             if (field[field.length - x - 1][x].equalsIgnoreCase(value)) {
                 index++;
             }
-            if(index == field.length) {
+            if (index == field.length) {
                 break;
             }
         }

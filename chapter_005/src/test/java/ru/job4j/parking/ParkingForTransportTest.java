@@ -79,13 +79,13 @@ public class ParkingForTransportTest {
      */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void whenParkingFull() {
-        Transport One = new Car("Car", "1a");
+        Transport one = new Car("Car", "1a");
         Transport truckOne = new Truck("Truck", "2b", 3);
         Transport truckTwo = new Truck("Truck", "3c", 2);
         Transport truckThree = new Truck("Truck", "4d", 3);
         Transport carTwo = new Car("Car", "5f");
         Parking parking = new ParkingForTransport(4, 2);
-        parking.add(One);
+        parking.add(one);
         parking.add(truckOne);
         parking.add(truckTwo);
         parking.add(truckThree);

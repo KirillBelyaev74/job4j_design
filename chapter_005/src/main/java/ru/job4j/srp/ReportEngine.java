@@ -2,7 +2,7 @@ package ru.job4j.srp;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ReportEngine implements Report{
+public class ReportEngine implements Report {
 
     private final Store store;
     private StringBuilder stringBuilder = new StringBuilder();

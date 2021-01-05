@@ -5,7 +5,7 @@ import javax.xml.parsers.*;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ReportInTheFormatXml implements Report{
+public class ReportInTheFormatXml implements Report {
 
     private Store store;
     private Document document;

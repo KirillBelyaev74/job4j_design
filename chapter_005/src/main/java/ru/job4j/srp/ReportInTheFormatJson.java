@@ -5,7 +5,7 @@ import org.json.simple.JSONObject;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ReportInTheFormatJson implements Report{
+public class ReportInTheFormatJson implements Report {
 
     private final Store store;
     private JSONObject employees = new JSONObject();

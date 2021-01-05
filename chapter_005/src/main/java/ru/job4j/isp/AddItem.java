@@ -26,7 +26,7 @@ public class AddItem<Menu> implements Item<Menu> {
         Optional<Node<Menu>> result = Optional.empty();
         Queue<Node<Menu>> data = new LinkedList<>();
         Iterator iterator = this.nodes.iterator();
-        while (result.isEmpty() && iterator.hasNext() ) {
+        while (result.isEmpty() && iterator.hasNext()) {
             data.offer((Node<Menu>) iterator.next());
             while (!data.isEmpty()) {
                 Node<Menu> element = data.poll();

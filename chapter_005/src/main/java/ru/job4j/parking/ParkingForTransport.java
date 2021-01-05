@@ -30,10 +30,10 @@ public class ParkingForTransport implements Parking {
         this.validate(transport);
         boolean result = false;
         int placeBusyTransport = transport.getPlaceBusyTransport();
-        if(placeBusyTransport > 1
+        if (placeBusyTransport > 1
                 && this.valueParkingTruck == this.parkingTruck.size()
                 && placeBusyTransport <= this.valueParkingCar - this.parkingCar.size()) {
-            for(int index = 0; index != placeBusyTransport; index++) {
+            for (int index = 0; index != placeBusyTransport; index++) {
                 this.parkingCar.add(transport);
             }
             result = true;
@@ -65,7 +65,7 @@ public class ParkingForTransport implements Parking {
      * @return - транспорт, который уезжает
      */
     public Transport delete(Transport transport) {
-        if(!this.parkingCar.contains(transport) && !this.parkingTruck.contains(transport)) {
+        if (!this.parkingCar.contains(transport) && !this.parkingTruck.contains(transport)) {
             throw new IllegalArgumentException();
         }
         int placeBusyTransport = transport.getPlaceBusyTransport();

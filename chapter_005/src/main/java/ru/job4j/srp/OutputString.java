@@ -2,7 +2,7 @@ package ru.job4j.srp;
 
 import java.io.*;
 
-public class OutputString implements Output{
+public class OutputString implements Output {
 
     private final String employees;
 

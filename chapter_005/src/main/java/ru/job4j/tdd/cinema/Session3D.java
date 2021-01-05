@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class Session3D implements Session {
 
-    public Map<Integer, Integer> freeSpace(Calendar calendar){
+    public Map<Integer, Integer> freeSpace(Calendar calendar) {
         return null;
     }
 
-    public Map<Integer, Integer> buzySpace(Calendar calendar){
+    public Map<Integer, Integer> buzySpace(Calendar calendar) {
         return null;
     }
 }
